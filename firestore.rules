@@ -1,0 +1,77 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isDocumentOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isResourceOwner() {
+      return request.auth.uid == resource.data.ownerId || request.auth.uid == resource.data.userId;
+    }
+
+    function hasSubscriptionSeat(subscriptionId) {
+      return exists(/databases/$(database)/documents/subscriptions/$(subscriptionId)/seats/$(request.auth.uid));
+    }
+
+    function isTeamOwner() {
+      return request.auth.uid == request.resource.data.ownerId;
+    }
+
+    function isTeamMemberOwner(teamId) {
+      return get(/databases/$(database)/documents/teams/$(teamId)).data.ownerId == request.auth.uid;
+    }
+
+    function isTeamAdmin(teamId) {
+      return get(/databases/$(database)/documents/teams/$(teamId)/members/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isTeamMember(teamId) {
+      return exists(/databases/$(database)/documents/teams/$(teamId)/members/$(request.auth.uid));
+    }
+
+    match /users/{userId} {
+      allow read, write: if isSignedIn() && isDocumentOwner(userId);
+    }
+
+    match /products/{productId} {
+      allow read: if isSignedIn();
+    }
+
+    match /prices/{priceId} {
+      allow read: if isSignedIn();
+    }
+
+    match /subscriptions/{subscriptionId} {
+      allow read: if isSignedIn() && isResourceOwner();
+    }
+
+    match /subscriptionInfo/{subscriptionId} {
+      allow read: if isSignedIn() && hasSubscriptionSeat(subscriptionId);
+    }
+
+    match /teams/{teamId} {
+      allow write: if isSignedIn() && (isTeamOwner() || isTeamAdmin(teamId));
+      allow read: if isSignedIn() && isTeamMember(teamId);
+
+      match /members/{memberId} {
+        allow write: if isSignedIn() && (isTeamMemberOwner(teamId) || isTeamAdmin(teamId));
+        allow read: if isSignedIn() && isTeamMember(teamId);
+      }
+    }
+
+    // this rule allows us to use collectionGroup queries to find all the user's subscription seats
+    match /{document=**}/seats/{seatId} {
+      allow read: if isSignedIn() && isResourceOwner();
+    }
+
+    // this rule allows us to use collectionGroup queries to find all the user's team members
+    match /{document=**}/members/{memberId} {
+      allow read: if isSignedIn() && isResourceOwner();
+    }
+  }
+}

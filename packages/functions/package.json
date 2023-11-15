@@ -1,0 +1,51 @@
+{
+  "name": "functions",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "engines": {
+    "node": "18"
+  },
+  "scripts": {
+    "predev:emulator": "npx kill-port 8080 9099",
+    "dev:emulator": "firebase emulators:start --only auth,firestore,functions --import ./emulator --export-on-exit ./emulator",
+    "dev:functions": "yarn build --watch --mode development",
+    "dev:stripe": "stripe listen --forward-to http://127.0.0.1:5001/the-shell-development/us-central1/stripeWebhookFunction",
+    "dev": "npm-run-all --parallel dev:*",
+    "lint:prettier": "prettier -c \"**/*.{ts,tsx}\"",
+    "lint:eslint": "eslint --ext [.ts,.tsx] .",
+    "lint:ts": "tsc",
+    "lint": "npm-run-all --parallel lint:*",
+    "prebuild": "rm -rf ./dist",
+    "build": "vite build --mode=$MODE"
+  },
+  "dependencies": {
+    "@react-email/components": "0.0.7",
+    "@react-email/render": "0.0.7",
+    "config": "*",
+    "emails": "*",
+    "firebase-admin": "11.8.0",
+    "firebase-functions": "4.3.1",
+    "resend": "1.0.0",
+    "stripe": "12.18.0",
+    "tailwind-merge": "1.14.0",
+    "utils": "*",
+    "uuid": "9.0.1"
+  },
+  "devDependencies": {
+    "@total-typescript/ts-reset": "0.4.2",
+    "@types/uuid": "9.0.2",
+    "eslint-config-custom": "*",
+    "firebase-functions-test": "3.1.0",
+    "npm-run-all": "4.1.5",
+    "prettier": "3.0.1",
+    "rollup-plugin-copy": "3.4.0",
+    "rollup-plugin-generate-package-json": "3.2.0",
+    "tsconfig": "*",
+    "types": "*",
+    "typescript": "5.1.6",
+    "vite": "4.4.9",
+    "vite-tsconfig-paths": "4.2.1"
+  }
+}

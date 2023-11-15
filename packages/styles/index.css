@@ -1,0 +1,20 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/lexend';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply scroll-smooth font-sans antialiased;
+}
+
+html,
+body {
+  @apply h-full;
+}
+
+/* added for components charts - not ideal but it means we don't need to use the @tremor theme */
+.recharts-tooltip-wrapper > div {
+  @apply bg-theme-background dark:bg-dark-theme-background;
+}

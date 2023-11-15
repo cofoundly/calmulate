@@ -1,0 +1,5 @@
+dist
+.env.development
+.env.staging
+.env.production
+coverage

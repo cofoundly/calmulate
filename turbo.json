@@ -1,0 +1,20 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "lint": {},
+    "test": {},
+    "app#build": {
+      "dependsOn": ["scripts#build", "firebase#build"]
+    },
+    "email#build": {
+      "dependsOn": ["scripts#build"]
+    },
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": false
+    }
+  }
+}

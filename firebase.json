@@ -1,0 +1,55 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "runtime": "nodejs18",
+      "predeploy": "cd ./packages/functions && yarn build",
+      "source": "./packages/functions/dist"
+    }
+  ],
+  "hosting": [
+    {
+      "target": "app",
+      "predeploy": "cd ./packages/scripts && yarn build && cd ../app && yarn build",
+      "public": "./packages/app/dist",
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "target": "storybook",
+      "predeploy": "cd ./packages/scripts && yarn build && cd ../components && yarn build",
+      "public": "./packages/components/storybook-static"
+    },
+    {
+      "target": "website",
+      "predeploy": "cd ./packages/scripts && yarn build && cd ../website && yarn build",
+      "public": "./packages/website/out",
+      "cleanUrls": true
+    }
+  ],
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "ui": {
+      "enabled": true
+    },
+    "singleProjectMode": true
+  }
+}

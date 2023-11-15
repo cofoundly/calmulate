@@ -1,0 +1,14 @@
+# Firebase
+firebase-debug.log
+firestore-debug.log
+.firebase
+ui-debug.log
+emulator
+
+# Compiled JavaScript files
+dist
+
+# secrets
+.env.development
+.env.staging
+.env.production

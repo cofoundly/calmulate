@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read # for checkout
+
+jobs:
+  development:
+    name: development
+    uses: ./.github/workflows/development.yml
+
+  release:
+    needs: development
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+
+    name: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+
+      - uses: actions/setup-node@v3
+
+      # Install deps
+      - run: yarn --frozen-lockfile
+
+      # Create release
+      - run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
