@@ -1,4 +1,4 @@
-import { Loading } from 'components'
+import { Alert, Loading } from 'components'
 import React, { useEffect } from 'react'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
@@ -47,6 +47,8 @@ export const SettingsSubscription = () => {
 
   return (
     <div>
+      {hasSubscriptionSuccess && <Alert className="mb-8">Subscription purchased successfully!</Alert>}
+
       <SubscriptionDetailsSection />
 
       <SubscriptionSeatsSection />
