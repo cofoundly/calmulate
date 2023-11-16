@@ -2,7 +2,7 @@
   "name": "Calmulate",
   "description": "A mindfulness and productivity app integrating data-driven insights with personal routines. Offers customized suggestions for stress management and efficiency, syncing with calendars and wearables.",
   "colors": {
-    "theme": "sky",
+    "theme": "blue",
     "neutral": "gray"
   },
   "emails": {

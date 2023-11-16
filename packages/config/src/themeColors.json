@@ -1,11 +1,11 @@
 {
   "theme": {
     "brand": {
-      "faint": "#f0f9ff",
-      "muted": "#bae6fd",
-      "subtle": "#38bdf8",
-      "DEFAULT": "#0ea5e9",
-      "emphasis": "#0369a1",
+      "faint": "#eff6ff",
+      "muted": "#bfdbfe",
+      "subtle": "#60a5fa",
+      "DEFAULT": "#3b82f6",
+      "emphasis": "#1d4ed8",
       "inverted": "#fff"
     },
     "background": {
@@ -30,11 +30,11 @@
   },
   "dark-theme": {
     "brand": {
-      "faint": "#0c4a6e",
-      "muted": "#082f49",
-      "subtle": "#075985",
-      "DEFAULT": "#0ea5e9",
-      "emphasis": "#38bdf8",
+      "faint": "#1e3a8a",
+      "muted": "#172554",
+      "subtle": "#1e40af",
+      "DEFAULT": "#3b82f6",
+      "emphasis": "#60a5fa",
       "inverted": "#030712"
     },
     "background": {
