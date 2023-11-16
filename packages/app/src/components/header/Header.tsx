@@ -13,7 +13,7 @@ export const Header = ({ className = '', children }: Props) => {
   return (
     <Headerbar className={twMerge('', className)}>
       <Button
-        variant="lightInverted"
+        variant="lightNeutral"
         className="lg:hidden"
         onClick={() => {
           setSidebarOpen(true)
