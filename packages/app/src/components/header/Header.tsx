@@ -1,5 +1,5 @@
 import { Bars3Icon } from '@heroicons/react/24/outline'
-import { Button, Headerbar, Logo } from 'components'
+import { Button, Headerbar } from 'components'
 import React, { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
@@ -23,8 +23,6 @@ export const Header = ({ className = '', children }: Props) => {
 
         <Bars3Icon className="h-6 w-6" aria-hidden="true" />
       </Button>
-
-      <Logo className="lg:hidden" variant="inverted" />
 
       {children}
     </Headerbar>
