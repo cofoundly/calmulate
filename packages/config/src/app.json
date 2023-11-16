@@ -1,8 +1,8 @@
 {
-  "name": "The Shell™",
-  "description": "The ultimate boilerplate for building SAAS applications with React, Firebase, Stripe, Tailwind CSS and TypeScript.",
+  "name": "Calmulate",
+  "description": "A mindfulness and productivity app integrating data-driven insights with personal routines. Offers customized suggestions for stress management and efficiency, syncing with calendars and wearables.",
   "colors": {
-    "theme": "teal",
+    "theme": "sky",
     "neutral": "gray"
   },
   "emails": {
@@ -10,8 +10,8 @@
     "support": "shaun@cofoundly.dev"
   },
   "social": {
-    "twitter": "https://twitter.com",
-    "github": "https://github.com",
-    "linkedIn": "https://linkedin.com"
+    "twitter": "",
+    "github": "",
+    "linkedIn": ""
   }
 }
