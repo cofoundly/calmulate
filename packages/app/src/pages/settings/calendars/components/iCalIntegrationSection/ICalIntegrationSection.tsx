@@ -1,4 +1,4 @@
-import { Alert, AnchorText, Button, CheckIcon, SmallText, TextInput } from 'components'
+import { Alert, AnchorText, Button, CheckIcon, NumberedList, TextInput } from 'components'
 import React, { ReactNode, useCallback, useState } from 'react'
 import { validateUrl } from 'utils'
 
@@ -25,7 +25,7 @@ const STEPS: ReactNode[] = [
   'Paste the link into the input below.',
 ]
 
-export const CalendarIntegrationSection = () => {
+export const ICalIntegrationSection = () => {
   const [calendarUrl, setCalendarUrl] = useCalendarUrl()
   const [url, setUrl] = useState(calendarUrl)
 
@@ -64,15 +64,7 @@ export const CalendarIntegrationSection = () => {
         ensuring your information is always private and protected.
       </Alert>
 
-      <ul className="flex flex-col gap-y-2">
-        {STEPS.map((step, index) => (
-          <li key={index} className="flex gap-x-4">
-            <SmallText>{index + 1}.</SmallText>
-
-            <SmallText>{step}</SmallText>
-          </li>
-        ))}
-      </ul>
+      <NumberedList items={STEPS} />
 
       <form className="space-y-6" onSubmit={onSubmit}>
         <TextInput

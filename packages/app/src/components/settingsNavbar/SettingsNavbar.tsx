@@ -37,9 +37,9 @@ export const SettingsNavbar = () => {
       active: location.pathname.includes(routes.settingsSubscription),
     },
     {
-      name: 'Integrations',
-      href: routes.settingsIntegrations,
-      active: location.pathname.includes(routes.settingsIntegrations),
+      name: 'Calendars',
+      href: routes.settingsCalendars,
+      active: location.pathname.includes(routes.settingsCalendars),
     },
     {
       name: 'Team',
