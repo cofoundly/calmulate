@@ -28,6 +28,7 @@ import { List } from './components/list/List'
 import { Loading } from './components/loading/Loading'
 import { Logo } from './components/logo/Logo'
 import { Navbar } from './components/navbar/Navbar'
+import { NumberedList } from './components/numberedList/NumberedList'
 import { ParagraphText } from './components/paragraphText/ParagraphText'
 import { Popover } from './components/popover/Popover'
 import { PricingCard } from './components/pricingCard/PricingCard'
@@ -72,6 +73,7 @@ export {
   Loading,
   Logo,
   Navbar,
+  NumberedList,
   ParagraphText,
   Popover,
   PricingCard,
