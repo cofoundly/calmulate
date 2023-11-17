@@ -37,6 +37,11 @@ export const SettingsNavbar = () => {
       active: location.pathname.includes(routes.settingsSubscription),
     },
     {
+      name: 'Integrations',
+      href: routes.settingsIntegrations,
+      active: location.pathname.includes(routes.settingsIntegrations),
+    },
+    {
       name: 'Team',
       href: routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId),
       active: location.pathname.includes(routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId)),

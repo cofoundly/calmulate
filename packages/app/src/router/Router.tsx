@@ -12,6 +12,7 @@ import { UnauthenticatedLayout } from '@/components/unauthenticatedLayout/Unauth
 import { Dashboard } from '@/pages/dashboard'
 import { ForgotPassword } from '@/pages/forgotPassword'
 import { SettingsAccount } from '@/pages/settings/account'
+import { SettingsIntegrations } from '@/pages/settings/integrations'
 import { SettingsSubscription } from '@/pages/settings/subscription'
 import { SettingsInviteTeamMembers } from '@/pages/settings/teams/inviteTeamMembers'
 import { SettingsTeam } from '@/pages/settings/teams/team'
@@ -56,6 +57,8 @@ const router = createBrowserRouter(
             <Route path={routes.settingsAccount} element={<SettingsAccount />} errorElement={errorElement} />
 
             <Route path={routes.settingsSubscription} element={<SettingsSubscription />} errorElement={errorElement} />
+
+            <Route path={routes.settingsIntegrations} element={<SettingsIntegrations />} errorElement={errorElement} />
 
             <Route element={<SubscriptionLayout />} errorElement={errorElement}>
               <Route element={<TeamPlanLayout />} errorElement={errorElement}>

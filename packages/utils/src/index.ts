@@ -19,6 +19,7 @@ import { useKeyPress } from './useKeyPress/useKeyPress'
 import { useLink } from './useLink/useLink'
 import { useOutsideClick } from './useOutsideClick/useOutsideClick'
 import { validateEmail } from './validateEmail/validateEmail'
+import { validateUrl } from './validateUrl/validateUrl'
 
 export {
   formatBillingAddress,
@@ -42,4 +43,5 @@ export {
   useLink,
   useOutsideClick,
   validateEmail,
+  validateUrl,
 }
