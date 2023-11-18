@@ -13,8 +13,12 @@ export const useCalendarEvents = () => {
   const events = parseICalData(calendarData)
 
   // filter the events by the date range
-  const [{ startDate, endDate }] = useCalendarDateRange()
-  const eventsForDateRange = filterEventsByDateRange({ events, startDate, endDate })
+  const [dateRange] = useCalendarDateRange()
+  const eventsForDateRange = filterEventsByDateRange({
+    events,
+    startDate: dateRange.start,
+    endDate: dateRange.end,
+  })
 
   return {
     data: eventsForDateRange,

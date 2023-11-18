@@ -20,7 +20,7 @@ const variantToClassNames: Record<Variant, string> = {
   secondary:
     'shadow-md border-theme-brand dark:border-dark-theme-brand text-theme-brand dark:text-dark-theme-brand hover:text-theme-brand-emphasis dark:hover:text-dark-theme-brand-emphasis hover:border-theme-brand-emphasis dark:hover:border-dark-theme-brand-emphasis',
   secondaryNeutral:
-    'shadow-md border-theme-content dark:border-dark-theme-content text-theme-content dark:text-dark-theme-content hover:text-theme-content-emphasis dark:hover:text-dark-theme-content-emphasis hover:border-theme-content-emphasis dark:hover:border-dark-theme-content-emphasis',
+    'shadow-md border-theme-content dark:border-dark-theme-content text-theme-content dark:text-dark-theme-content hover:text-theme-content-emphasis dark:hover:text-dark-theme-content-emphasis hover:border-theme-content-emphasis dark:hover:border-dark-theme-content-emphasis hover:bg-theme-background-muted dark:hover:bg-dark-theme-background-muted',
   secondaryInverted: 'shadow-md text-white dark:text-white hover:bg-theme-brand-inverted/10',
   light:
     'border-transparent text-theme-brand dark:text-dark-theme-brand hover:text-theme-brand-emphasis dark:hover:text-dark-theme-brand-emphasis',

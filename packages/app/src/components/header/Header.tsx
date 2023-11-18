@@ -11,7 +11,7 @@ export const Header = ({ className = '', children }: Props) => {
   const [_, setSidebarOpen] = useSidebarOpen()
 
   return (
-    <Headerbar className={twMerge('', className)}>
+    <Headerbar className={twMerge('shadow-none', className)}>
       <Button
         variant="lightNeutral"
         className="lg:hidden"

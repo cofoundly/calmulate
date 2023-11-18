@@ -1,21 +1,21 @@
-import dayjs from 'dayjs'
+import { date } from '@/date'
 
-import { parseICalData } from './parseICalData'
+import { CalendarEvent } from '../models'
 
 export const filterEventsByDateRange = ({
   events,
   startDate,
   endDate,
 }: {
-  events: Array<ReturnType<typeof parseICalData>['0']>
-  startDate: dayjs.ConfigType
-  endDate: dayjs.ConfigType
+  events: CalendarEvent[]
+  startDate: string
+  endDate: string
 }) => {
-  const start = dayjs(startDate).startOf('day')
-  const end = dayjs(endDate).endOf('day')
+  const start = date(startDate).startOf('day')
+  const end = date(endDate).endOf('day')
 
   return events.filter(event => {
-    const eventStart = dayjs(event.start)
+    const eventStart = date(event.start)
 
     return eventStart.isAfter(start) && eventStart.isBefore(end)
   })

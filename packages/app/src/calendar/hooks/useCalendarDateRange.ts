@@ -1,15 +1,16 @@
-import dayjs from 'dayjs'
 import { atom, useAtom } from 'jotai'
 
-const startOfWeek = dayjs().startOf('week').toISOString()
-const endOfWeek = dayjs().endOf('week').toISOString()
+import { date } from '@/date'
+
+const startOfWeek = date().startOf('isoWeek').toISOString()
+const endOfWeek = date().endOf('isoWeek').toISOString()
 
 const calendarDateRangeAtom = atom<{
-  startDate: string
-  endDate: string
+  start: string
+  end: string
 }>({
-  startDate: startOfWeek,
-  endDate: endOfWeek,
+  start: startOfWeek,
+  end: endOfWeek,
 })
 
 export const useCalendarDateRange = () => useAtom(calendarDateRangeAtom)
