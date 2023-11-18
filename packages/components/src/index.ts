@@ -42,6 +42,7 @@ import { SmallText } from './components/smallText/SmallText'
 import { Snackbar } from './components/snackbar/Snackbar'
 import { Table } from './components/table/Table'
 import { TextInput } from './components/textInput/TextInput'
+import { TinyText } from './components/tinyText/TinyText'
 import { TitleText } from './components/titleText/TitleText'
 
 export {
@@ -87,5 +88,6 @@ export {
   Snackbar,
   Table,
   TextInput,
+  TinyText,
   TitleText,
 }
