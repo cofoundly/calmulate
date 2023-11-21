@@ -8,7 +8,7 @@ import { Button, ButtonProps } from '../button/Button'
 import { Dialog } from '../dialog/Dialog'
 import { LabelText } from '../labelText/LabelText'
 
-type ColorName = typeof colors[number]
+export type ColorName = typeof colors[number]
 
 type ColorProps = { name: ColorName; selected: boolean } & ButtonProps
 

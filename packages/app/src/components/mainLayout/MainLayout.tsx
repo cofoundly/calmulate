@@ -74,7 +74,7 @@ export const MainLayout = () => {
         </Popover>
       </div>
 
-      <div className="hidden shrink-0 lg:flex lg:w-72 lg:flex-col">{sidebar}</div>
+      <div className="hidden shrink-0 lg:flex lg:flex-col">{sidebar}</div>
 
       <div className="bg-theme-background dark:bg-dark-theme-background flex flex-1 flex-col overflow-hidden">
         <Outlet />

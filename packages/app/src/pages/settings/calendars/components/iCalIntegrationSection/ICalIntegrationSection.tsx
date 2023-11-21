@@ -3,7 +3,7 @@ import React, { ReactNode, useCallback, useState } from 'react'
 import { validateUrl } from 'utils'
 
 import { useCalendarEvents } from '@/calendar/hooks/useCalendarEvents'
-import { useCalendarUrl } from '@/calendar/hooks/useCalendarUrl'
+import { useICalCalendarUrl } from '@/calendar/hooks/useICalCalendarUrl'
 import { PageSection } from '@/components/pageSection/PageSection'
 
 const STEPS: ReactNode[] = [
@@ -26,7 +26,7 @@ const STEPS: ReactNode[] = [
 ]
 
 export const ICalIntegrationSection = () => {
-  const [calendarUrl, setCalendarUrl] = useCalendarUrl()
+  const [calendarUrl, setCalendarUrl] = useICalCalendarUrl()
   const [url, setUrl] = useState(calendarUrl)
 
   const { isFetching, isFetched } = useCalendarEvents()

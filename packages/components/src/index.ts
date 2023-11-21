@@ -33,6 +33,7 @@ import { ParagraphText } from './components/paragraphText/ParagraphText'
 import { Popover } from './components/popover/Popover'
 import { PricingCard } from './components/pricingCard/PricingCard'
 import { PricingCards } from './components/pricingCards/PricingCards'
+import { ProgressCircle } from './components/progressCircle/ProgressCircle'
 import { RadioGroup } from './components/radioGroup/RadioGroup'
 import { Select } from './components/select/Select'
 import { Sidebar } from './components/sidebar/Sidebar'
@@ -79,6 +80,7 @@ export {
   Popover,
   PricingCard,
   PricingCards,
+  ProgressCircle,
   RadioGroup,
   Select,
   Sidebar,

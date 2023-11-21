@@ -2,18 +2,29 @@ import ical from 'ical'
 
 import { date } from '@/date'
 
-import { CalendarEvent } from '../models'
+import { CalendarEvent, CalendarEventCategories } from '../models'
+import { categoriseEvent } from './categoriseEvent'
 
-export const parseICalData = (iCalData: string): CalendarEvent[] => {
-  const data = ical.parseICS(iCalData)
+export const parseICalData = ({
+  data,
+  categories,
+}: {
+  data: string
+  categories: CalendarEventCategories
+}): CalendarEvent[] => {
+  const parsedData = ical.parseICS(data)
 
-  const events = Object.values(data).map(event => {
+  const events = Object.values(parsedData).map(event => {
     const calendarEvent: CalendarEvent = {
       id: event.uid || '',
-      title: event.summary || '',
+      summary: event.summary || '',
+      description: event.description || '',
       start: date(event.start).toISOString() || '',
       end: date(event.end).toISOString() || '',
+      category: 'unspecified',
     }
+
+    calendarEvent.category = categoriseEvent(calendarEvent, categories)
 
     return calendarEvent
   })

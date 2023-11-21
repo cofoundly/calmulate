@@ -4,6 +4,7 @@ import React, { ComponentPropsWithoutRef, useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { useCalendarDateRange } from '@/calendar/hooks/useCalendarDateRange'
+import { isDayMode } from '@/calendar/utils/isDayMode'
 import { date } from '@/date'
 
 type Props = ComponentPropsWithoutRef<'header'>
@@ -11,8 +12,7 @@ type Props = ComponentPropsWithoutRef<'header'>
 export const CalendarHeader = ({ className = '', ...props }: Props) => {
   const [{ start: startDate, end: endDate }, setDateRange] = useCalendarDateRange()
 
-  // the calendar is in day mode if the start and end dates are the same day
-  const isDayMode = date(startDate).isSame(date(endDate), 'day')
+  const dayMode = isDayMode({ startDate, endDate })
 
   // display if November 2023 if the start and end dates in November 2023
   // display Oct to Nov 2023 if the start date is in October 2023 and the end date is in November 2023
@@ -29,35 +29,35 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
   const onPreviousWeekClick = useCallback(() => {
     setDateRange({
       start: date(startDate)
-        .subtract(1, isDayMode ? 'day' : 'week')
+        .subtract(1, dayMode ? 'day' : 'week')
         .toISOString(),
       end: date(endDate)
-        .subtract(1, isDayMode ? 'day' : 'week')
+        .subtract(1, dayMode ? 'day' : 'week')
         .toISOString(),
     })
-  }, [setDateRange, startDate, isDayMode, endDate])
+  }, [setDateRange, startDate, dayMode, endDate])
 
   const onThisWeekClick = useCallback(() => {
     setDateRange({
       start: date()
-        .startOf(isDayMode ? 'day' : 'week')
+        .startOf(dayMode ? 'day' : 'week')
         .toISOString(),
       end: date()
-        .endOf(isDayMode ? 'day' : 'week')
+        .endOf(dayMode ? 'day' : 'week')
         .toISOString(),
     })
-  }, [isDayMode, setDateRange])
+  }, [dayMode, setDateRange])
 
   const onNextWeekClick = useCallback(() => {
     setDateRange({
       start: date(startDate)
-        .add(1, isDayMode ? 'day' : 'week')
+        .add(1, dayMode ? 'day' : 'week')
         .toISOString(),
       end: date(endDate)
-        .add(1, isDayMode ? 'day' : 'week')
+        .add(1, dayMode ? 'day' : 'week')
         .toISOString(),
     })
-  }, [setDateRange, startDate, isDayMode, endDate])
+  }, [setDateRange, startDate, dayMode, endDate])
 
   return (
     <header
@@ -70,19 +70,19 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
       <HeadingText>{heading}</HeadingText>
 
       <div className="flex items-center">
-        <div className="border-theme-border dark:border-dark-theme-border relative flex items-center rounded-xl border shadow-md">
+        <div className="border-theme-border dark:border-dark-theme-border relative flex items-center rounded-xl border shadow-sm">
           <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onPreviousWeekClick}>
-            <span className="sr-only">{isDayMode ? 'Yesterday' : 'Previous week'}</span>
+            <span className="sr-only">{dayMode ? 'Yesterday' : 'Previous week'}</span>
 
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </Button>
 
           <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onThisWeekClick}>
-            {isDayMode ? 'Today' : 'This Week'}
+            {dayMode ? 'Today' : 'This Week'}
           </Button>
 
           <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onNextWeekClick}>
-            <span className="sr-only">{isDayMode ? 'Tomorrow' : 'Next week'}</span>
+            <span className="sr-only">{dayMode ? 'Tomorrow' : 'Next week'}</span>
 
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
           </Button>
