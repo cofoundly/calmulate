@@ -37,7 +37,7 @@ export type CalendarEvent = {
   id: string
   summary: string
   description: string
-  start: string
-  end: string
+  startDate: string
+  endDate: string
   category: CalendarEventCategory['id']
 }

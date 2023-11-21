@@ -1,12 +1,11 @@
 import { filterEventsByDateRange } from '../utils/filterEventsByDateRange'
 import { useCachedCalendarEvents } from './useCachedCalendarEvents'
-import { useCalendarDateRange } from './useCalendarDateRange'
 import { useICalCalendarEvents } from './useICalCalendarEvents'
 import { useSyncCalendarEventsWithCache } from './useSyncCalendarEventsWithCache'
 
-export const useCalendarEvents = () => {
+export const useCalendarEvents = (dateRange?: { startDate: string; endDate: string }) => {
   // get the local calendar data
-  const [events] = useCachedCalendarEvents()
+  const [cachedEvents] = useCachedCalendarEvents()
 
   // fetch the iCal calendar data
   const { data: iCalCalendarEvents, ...iCalCalendarEventsQuery } = useICalCalendarEvents()
@@ -15,15 +14,17 @@ export const useCalendarEvents = () => {
   useSyncCalendarEventsWithCache(iCalCalendarEvents)
 
   // filter the events by the date range
-  const [dateRange] = useCalendarDateRange()
-  const eventsForDateRange = filterEventsByDateRange({
-    events: Object.values(events),
-    startDate: dateRange.start,
-    endDate: dateRange.end,
-  })
+  let events = Object.values(cachedEvents)
+
+  if (dateRange) {
+    events = filterEventsByDateRange({
+      events,
+      ...dateRange,
+    })
+  }
 
   return {
     ...iCalCalendarEventsQuery,
-    data: eventsForDateRange,
+    data: events,
   }
 }

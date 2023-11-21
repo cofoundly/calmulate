@@ -6,11 +6,11 @@ const startOfWeek = date().startOf('isoWeek').toISOString()
 const endOfWeek = date().endOf('isoWeek').toISOString()
 
 const calendarDateRangeAtom = atom<{
-  start: string
-  end: string
+  startDate: string
+  endDate: string
 }>({
-  start: startOfWeek,
-  end: endOfWeek,
+  startDate: startOfWeek,
+  endDate: endOfWeek,
 })
 
 export const useCalendarDateRange = () => useAtom(calendarDateRangeAtom)

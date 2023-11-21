@@ -15,7 +15,7 @@ export const filterEventsByDateRange = ({
   const end = date(endDate).endOf('day')
 
   return events.filter(event => {
-    const eventStart = date(event.start)
+    const eventStart = date(event.startDate)
 
     return eventStart.isAfter(start) && eventStart.isBefore(end)
   })

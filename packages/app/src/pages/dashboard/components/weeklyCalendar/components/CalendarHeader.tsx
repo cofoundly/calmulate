@@ -10,7 +10,7 @@ import { date } from '@/date'
 type Props = ComponentPropsWithoutRef<'header'>
 
 export const CalendarHeader = ({ className = '', ...props }: Props) => {
-  const [{ start: startDate, end: endDate }, setDateRange] = useCalendarDateRange()
+  const [{ startDate, endDate }, setDateRange] = useCalendarDateRange()
 
   const dayMode = isDayMode({ startDate, endDate })
 
@@ -28,10 +28,10 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
 
   const onPreviousWeekClick = useCallback(() => {
     setDateRange({
-      start: date(startDate)
+      startDate: date(startDate)
         .subtract(1, dayMode ? 'day' : 'week')
         .toISOString(),
-      end: date(endDate)
+      endDate: date(endDate)
         .subtract(1, dayMode ? 'day' : 'week')
         .toISOString(),
     })
@@ -39,10 +39,10 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
 
   const onThisWeekClick = useCallback(() => {
     setDateRange({
-      start: date()
+      startDate: date()
         .startOf(dayMode ? 'day' : 'week')
         .toISOString(),
-      end: date()
+      endDate: date()
         .endOf(dayMode ? 'day' : 'week')
         .toISOString(),
     })
@@ -50,10 +50,10 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
 
   const onNextWeekClick = useCallback(() => {
     setDateRange({
-      start: date(startDate)
+      startDate: date(startDate)
         .add(1, dayMode ? 'day' : 'week')
         .toISOString(),
-      end: date(endDate)
+      endDate: date(endDate)
         .add(1, dayMode ? 'day' : 'week')
         .toISOString(),
     })

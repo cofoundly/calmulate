@@ -1,6 +1,7 @@
 import React, { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
+import { useCalendarDateRange } from '@/calendar/hooks/useCalendarDateRange'
 import { useCalendarEventCategories } from '@/calendar/hooks/useCalendarEventCategories'
 import { useCalendarEvents } from '@/calendar/hooks/useCalendarEvents'
 import { date } from '@/date'
@@ -16,18 +17,18 @@ import { useCalendarResponsiveDateRange } from './hooks/useCalendarResponsiveDat
 const GRID_SNAP_INTERVAL_MINUTES = 5
 const EVENT_ROWS = 24 * (60 / GRID_SNAP_INTERVAL_MINUTES)
 
-const getEventColStart = (start: string) => {
-  const day = date(start).isoWeekday()
+const getEventColStart = (startDate: string) => {
+  const day = date(startDate).isoWeekday()
 
   return day
 }
 
-const getEventGridRow = ({ start, end }: { start: string; end: string }) => {
-  const startDate = date(start)
-  const totalMinutes = startDate.hour() * 60 + startDate.minute()
+const getEventGridRow = ({ startDate, endDate }: { startDate: string; endDate: string }) => {
+  const start = date(startDate)
+  const totalMinutes = start.hour() * 60 + start.minute()
   const gridPosition = Math.floor(totalMinutes / GRID_SNAP_INTERVAL_MINUTES) + 1 + 1 // the extra 1 is to account for our initial row start styles
 
-  const duration = date(end).diff(startDate, 'minutes')
+  const duration = date(endDate).diff(start, 'minutes')
   const gridSpan = Math.floor(duration / GRID_SNAP_INTERVAL_MINUTES)
 
   return `${gridPosition} / span ${gridSpan}`
@@ -36,7 +37,8 @@ const getEventGridRow = ({ start, end }: { start: string; end: string }) => {
 type Props = ComponentPropsWithoutRef<'div'>
 
 export const WeeklyCalendar = ({ className = '', ...props }: Props) => {
-  const { data: events } = useCalendarEvents()
+  const [dateRange] = useCalendarDateRange()
+  const { data: events } = useCalendarEvents(dateRange)
   const [categories] = useCalendarEventCategories()
 
   useCalendarResponsiveDateRange()
@@ -69,9 +71,9 @@ export const WeeklyCalendar = ({ className = '', ...props }: Props) => {
                 {events.map(event => (
                   <li
                     key={event.id}
-                    className={`relative mt-px flex sm:col-start-${getEventColStart(event.start)}`}
+                    className={`relative mt-px flex sm:col-start-${getEventColStart(event.startDate)}`}
                     style={{
-                      gridRow: getEventGridRow({ start: event.start, end: event.end }),
+                      gridRow: getEventGridRow({ startDate: event.startDate, endDate: event.endDate }),
                     }}
                   >
                     <CalendarEvent className="absolute inset-1" event={event} category={categories[event.category]} />

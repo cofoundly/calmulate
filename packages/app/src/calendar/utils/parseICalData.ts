@@ -19,8 +19,8 @@ export const parseICalData = ({
       id: event.uid || '',
       summary: event.summary || '',
       description: event.description || '',
-      start: date(event.start).toISOString() || '',
-      end: date(event.end).toISOString() || '',
+      startDate: date(event.start).toISOString() || '',
+      endDate: date(event.end).toISOString() || '',
       category: 'unspecified',
     }
 

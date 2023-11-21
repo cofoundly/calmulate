@@ -14,7 +14,7 @@ const WEEKDAYS = getCurrentWeekdays()
 type Props = ComponentPropsWithoutRef<'div'>
 
 export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref: any) => {
-  const [{ start: startDate, end: endDate }, setDateRange] = useCalendarDateRange()
+  const [{ startDate, endDate }, setDateRange] = useCalendarDateRange()
 
   const dayMode = isDayMode({ startDate, endDate })
 
@@ -22,8 +22,8 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
     (weekday: typeof WEEKDAYS[0]) => {
       // set the date range to that day
       setDateRange({
-        start: weekday.startOf('day').toISOString(),
-        end: weekday.endOf('day').toISOString(),
+        startDate: weekday.startOf('day').toISOString(),
+        endDate: weekday.endOf('day').toISOString(),
       })
     },
     [setDateRange],

@@ -22,7 +22,7 @@ export const CalendarEvent = ({ className = '', event, category, ...props }: Pro
       <TinyText
         className={`text-${category.color}-500 group-hover:text-${category.color}-700 dark:text-${category.color}-400 dark:group-hover:text-${category.color}-200`}
       >
-        <time dateTime={event.start}>{date(event.start).format('HH:mm A')}</time>
+        <time dateTime={event.startDate}>{date(event.startDate).format('HH:mm A')}</time>
       </TinyText>
 
       <TinyText className={`font-semibold text-${category.color}-700 dark:text-${category.color}-200`}>

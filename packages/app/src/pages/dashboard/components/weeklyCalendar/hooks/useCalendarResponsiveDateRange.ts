@@ -8,7 +8,7 @@ import { date } from '@/date'
 const MD_BREAKPOINT = 640
 
 export const useCalendarResponsiveDateRange = () => {
-  const [{ start: startDate, end: endDate }, setDateRange] = useCalendarDateRange()
+  const [{ startDate, endDate }, setDateRange] = useCalendarDateRange()
   const { width: windowWidth } = useWindowSize()
 
   const dayMode = isDayMode({ startDate, endDate })
@@ -17,16 +17,16 @@ export const useCalendarResponsiveDateRange = () => {
     // if the window width is less than the breakpoint, we want to show the day mode
     if (windowWidth && !dayMode && windowWidth < MD_BREAKPOINT) {
       setDateRange({
-        start: date().startOf('day').toISOString(),
-        end: date().endOf('day').toISOString(),
+        startDate: date().startOf('day').toISOString(),
+        endDate: date().endOf('day').toISOString(),
       })
     }
 
     // if the window width is greater than the breakpoint, we want to show the week mode
     if (windowWidth && dayMode && windowWidth >= MD_BREAKPOINT) {
       setDateRange({
-        start: date().startOf('isoWeek').toISOString(),
-        end: date().endOf('isoWeek').toISOString(),
+        startDate: date().startOf('isoWeek').toISOString(),
+        endDate: date().endOf('isoWeek').toISOString(),
       })
     }
   }, [dayMode, setDateRange, windowWidth])
