@@ -1,11 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-type SpinnerProps = {
+type SpinnerProps = ComponentPropsWithoutRef<'svg'> & {
   loading?: boolean
 }
 
-export const Spinner = ({ loading }: SpinnerProps) => {
+export const Spinner = ({ className = '', loading, ...props }: SpinnerProps) => {
   return (
     <AnimatePresence>
       {loading && (
@@ -17,7 +18,7 @@ export const Spinner = ({ loading }: SpinnerProps) => {
           animate={{ opacity: 1, width: 'auto' }}
           exit={{ opacity: 0, width: '0px' }}
         >
-          <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24">
+          <svg className={twMerge('h-4 w-4 animate-spin', className)} viewBox="0 0 24 24" {...props}>
             <circle
               className="fill-transparent opacity-25"
               cx="12"

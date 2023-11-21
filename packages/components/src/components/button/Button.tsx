@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { Spinner } from './Spinner'
+import { Spinner } from '../spinner/Spinner'
 
 type Variant =
   | 'primary'

@@ -41,6 +41,7 @@ import { SkeletonLoader } from './components/skeletonLoader/SkeletonLoader'
 import { SlimLayout } from './components/slimLayout/SlimLayout'
 import { SmallText } from './components/smallText/SmallText'
 import { Snackbar } from './components/snackbar/Snackbar'
+import { Spinner } from './components/spinner/Spinner'
 import { Table } from './components/table/Table'
 import { TextInput } from './components/textInput/TextInput'
 import { TinyText } from './components/tinyText/TinyText'
@@ -88,6 +89,7 @@ export {
   SlimLayout,
   SmallText,
   Snackbar,
+  Spinner,
   Table,
   TextInput,
   TinyText,
