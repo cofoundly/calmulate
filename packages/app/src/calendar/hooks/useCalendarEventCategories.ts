@@ -3,7 +3,6 @@ import { atomWithStorage } from 'jotai/utils'
 
 import { CalendarEventCategories } from '../models'
 
-// "unspecified: Creative Thinking Session: Time allocated for creative thinking or personal projects."
 const DEFAULT_CATEGORIES: CalendarEventCategories = {
   meeting: {
     id: 'meeting',
@@ -25,33 +24,6 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
       'consultation',
       'convention',
       'briefing',
-    ],
-  },
-  deadline: {
-    id: 'deadline',
-    name: 'Deadline',
-    color: 'red',
-    icon: 'CalendarIcon',
-    keywords: [
-      'deadline',
-      'due date',
-      'cut-off',
-      'time limit',
-      'end date',
-      'submission date',
-      'completion date',
-      'target date',
-      'schedule',
-      'timeline',
-      'due',
-    ],
-  },
-  presentation: {
-    id: 'presentation',
-    name: 'Presentation',
-    color: 'violet',
-    icon: 'PresentationChartBarIcon',
-    keywords: [
       'presentation',
       'demo',
       'demonstration',
@@ -64,6 +36,7 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
       'webinar',
       'pitch',
       'portfolio',
+      'session',
     ],
   },
   focusedWork: {
@@ -93,6 +66,20 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
       'concentrated effort',
       'undisturbed work',
     ],
+  },
+  dailyPlanning: {
+    id: 'dailyPlanning',
+    name: 'Daily Planning',
+    color: 'indigo',
+    icon: 'ClipboardIcon',
+    keywords: ['plan', 'planning'],
+  },
+  creativeThinking: {
+    id: 'creativeThinking',
+    name: 'Creative Thinking',
+    color: 'orange',
+    icon: 'LightBulbIcon',
+    keywords: ['creative', 'creativity', 'brainstorm', 'brainstorming', 'ideation', 'strategic', 'thinking'],
   },
   workTask: {
     id: 'workTask',
@@ -250,7 +237,7 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
   },
   relaxation: {
     id: 'relaxation',
-    name: 'Relaxation',
+    name: 'Mindfulness & Relaxation',
     color: 'cyan',
     icon: 'SunIcon',
     keywords: [
@@ -268,14 +255,6 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
       'siesta',
       'nap',
       'recreation',
-    ],
-  },
-  meditation: {
-    id: 'meditation',
-    name: 'Meditation',
-    color: 'sky',
-    icon: 'MoonIcon',
-    keywords: [
       'meditation',
       'meditate',
       'mindfulness',
@@ -284,13 +263,12 @@ const DEFAULT_CATEGORIES: CalendarEventCategories = {
       'tranquility',
       'peace',
       'contemplation',
-      'yoga',
       'breathing exercise',
       'guided relaxation',
     ],
   },
-  socialEvent: {
-    id: 'socialEvent',
+  social: {
+    id: 'social',
     name: 'Social Event',
     color: 'purple',
     icon: 'ChatBubbleBottomCenterIcon',

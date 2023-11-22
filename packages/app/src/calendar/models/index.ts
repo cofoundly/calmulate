@@ -1,11 +1,11 @@
 import * as HeroIcons from '@heroicons/react/24/solid'
 import { colors } from 'colors'
 
-type CalendarEventCategoryId =
+export type CalendarEventCategoryId =
   | 'meeting'
-  | 'deadline'
-  | 'presentation'
   | 'focusedWork'
+  | 'dailyPlanning'
+  | 'creativeThinking'
   | 'workTask'
   | 'teamBuilding'
   | 'networking'
@@ -14,8 +14,7 @@ type CalendarEventCategoryId =
   | 'medicalAppointment'
   | 'familyTime'
   | 'relaxation'
-  | 'meditation'
-  | 'socialEvent'
+  | 'social'
   | 'hobby'
   | 'travel'
   | 'personalDevelopment'
@@ -37,6 +36,8 @@ export type CalendarEvent = {
   id: string
   summary: string
   description: string
+  createdDate: string
+  lastModifiedDate: string
   startDate: string
   endDate: string
   category: CalendarEventCategory['id']

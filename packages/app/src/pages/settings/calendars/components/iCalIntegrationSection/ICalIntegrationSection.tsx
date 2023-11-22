@@ -29,7 +29,7 @@ export const ICalIntegrationSection = () => {
   const [calendarUrl, setCalendarUrl] = useICalCalendarUrl()
   const [url, setUrl] = useState(calendarUrl)
 
-  const { isFetching, isFetched } = useCalendarEvents()
+  const { isLoading, isFetched } = useCalendarEvents()
 
   const onChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,17 +72,17 @@ export const ICalIntegrationSection = () => {
           label="Calendar URL"
           placeholder="Paste your calendar URL here"
           value={url}
-          disabled={isFetching}
+          disabled={isLoading}
           onChange={onChange}
         />
 
         <Button
           type="submit"
           icon={isFetched && <CheckIcon className="h-auto text-inherit" />}
-          loading={isFetching}
-          disabled={!validateUrl(url) || isFetching || isFetched}
+          loading={isLoading}
+          disabled={!validateUrl(url) || isLoading || isFetched}
         >
-          {isFetched ? 'Calendar Synced!' : isFetching ? 'Syncing Calendar...' : 'Sync Calendar'}
+          {isFetched ? 'Calendar Synced!' : isLoading ? 'Syncing Calendar...' : 'Sync Calendar'}
         </Button>
       </form>
     </PageSection>

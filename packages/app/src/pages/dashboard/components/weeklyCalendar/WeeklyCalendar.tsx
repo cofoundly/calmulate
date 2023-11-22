@@ -36,6 +36,7 @@ const getEventGridRow = ({ startDate, endDate }: { startDate: string; endDate: s
 
 type Props = ComponentPropsWithoutRef<'div'>
 
+// TODO: SS are we able to render overlapping events?
 export const WeeklyCalendar = ({ className = '', ...props }: Props) => {
   const [dateRange] = useCalendarDateRange()
   const { data: events } = useCalendarEvents(dateRange)

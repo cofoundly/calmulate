@@ -3,9 +3,12 @@ import React, { ComponentPropsWithoutRef, forwardRef, useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { useCalendarDateRange } from '@/calendar/hooks/useCalendarDateRange'
+import { useCalendarEvents } from '@/calendar/hooks/useCalendarEvents'
+import { filterEventsByDateRange } from '@/calendar/utils/filterEventsByDateRange'
 import { getCurrentWeekdays } from '@/calendar/utils/getCurrentWeekdays'
 import { isDayMode } from '@/calendar/utils/isDayMode'
 import { date } from '@/date'
+import { useMetricsSettings } from '@/metrics/hooks/useMetricsSettings'
 
 import { CalendarDayStatus } from './CalendarDayStatus'
 
@@ -17,6 +20,14 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
   const [{ startDate, endDate }, setDateRange] = useCalendarDateRange()
 
   const dayMode = isDayMode({ startDate, endDate })
+
+  // using these hooks here are purely an optimisation for CalendarDayStatus
+  const { data: calendarEvents, isLoading: calendarEventsLoading } = useCalendarEvents({
+    // we need the full week's event's in case we are in day mode
+    startDate: dayMode ? date(startDate).startOf('isoWeek').toISOString() : startDate,
+    endDate: dayMode ? date(startDate).endOf('isoWeek').toISOString() : endDate,
+  })
+  const [metricsSettings] = useMetricsSettings()
 
   const onNavWeekdayClick = useCallback(
     (weekday: typeof WEEKDAYS[0]) => {
@@ -53,14 +64,23 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
 
           const dayModeDay = dayMode && day.isSame(date(startDate), 'day')
 
+          const events = filterEventsByDateRange({
+            events: calendarEvents,
+            startDate: day.startOf('day').toISOString(),
+            endDate: day.endOf('day').toISOString(),
+          })
+          const hasEvents = events.length
+
           return (
             <Button
               key={weekday.toISOString()}
               variant="lightNeutral"
-              className="text-theme-content-subtle dark:text-dark-theme-content-subtle flex flex-col gap-y-4 rounded-none border-0 sm:pointer-events-none"
+              className="text-theme-content-subtle dark:text-dark-theme-content-subtle flex flex-col justify-end gap-y-4 rounded-none border-0 sm:pointer-events-none"
               onClick={() => onNavWeekdayClick(day)}
             >
-              <CalendarDayStatus />
+              {hasEvents ? (
+                <CalendarDayStatus events={events} metricsSettings={metricsSettings} loading={calendarEventsLoading} />
+              ) : null}
 
               <div className="flex flex-col gap-2 md:flex-row md:items-baseline">
                 <span>{day.format('ddd')}</span>
