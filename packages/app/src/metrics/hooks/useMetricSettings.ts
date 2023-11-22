@@ -3,7 +3,7 @@ import { atomWithStorage } from 'jotai/utils'
 
 import { CalendarEventCategoryId } from '@/calendar/models'
 
-export type MetricsSettings = {
+export type MetricSettings = {
   stressHigh: number
   stressAverage: number
   productivityHigh: number
@@ -35,7 +35,7 @@ export type MetricsSettings = {
   socialCategories: CalendarEventCategoryId[]
 }
 
-const atom = atomWithStorage<MetricsSettings>('metricsSettings', {
+const atom = atomWithStorage<MetricSettings>('metricsSettings', {
   stressHigh: 70,
   stressAverage: 40,
   productivityHigh: 70,
@@ -86,4 +86,4 @@ const atom = atomWithStorage<MetricsSettings>('metricsSettings', {
   socialCategories: ['social', 'familyTime', 'networking'],
 })
 
-export const useMetricsSettings = () => useAtom(atom)
+export const useMetricSettings = () => useAtom(atom)

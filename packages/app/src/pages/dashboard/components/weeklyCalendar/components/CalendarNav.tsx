@@ -8,7 +8,7 @@ import { filterEventsByDateRange } from '@/calendar/utils/filterEventsByDateRang
 import { getCurrentWeekdays } from '@/calendar/utils/getCurrentWeekdays'
 import { isDayMode } from '@/calendar/utils/isDayMode'
 import { date } from '@/date'
-import { useMetricsSettings } from '@/metrics/hooks/useMetricsSettings'
+import { useMetricSettings } from '@/metrics/hooks/useMetricSettings'
 
 import { CalendarDayStatus } from './CalendarDayStatus'
 
@@ -27,7 +27,7 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
     startDate: dayMode ? date(startDate).startOf('isoWeek').toISOString() : startDate,
     endDate: dayMode ? date(startDate).endOf('isoWeek').toISOString() : endDate,
   })
-  const [metricsSettings] = useMetricsSettings()
+  const [metricsSettings] = useMetricSettings()
 
   const onNavWeekdayClick = useCallback(
     (weekday: typeof WEEKDAYS[0]) => {
@@ -72,17 +72,17 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
           const hasEvents = events.length
 
           return (
-            <Button
-              key={weekday.toISOString()}
-              variant="lightNeutral"
-              className="text-theme-content-subtle dark:text-dark-theme-content-subtle flex flex-col justify-end gap-y-4 rounded-none border-0 sm:pointer-events-none"
-              onClick={() => onNavWeekdayClick(day)}
-            >
+            <div key={weekday.toISOString()} className="flex flex-col justify-end gap-y-4 py-2">
               {hasEvents ? (
                 <CalendarDayStatus events={events} metricsSettings={metricsSettings} loading={calendarEventsLoading} />
               ) : null}
 
-              <div className="flex flex-col gap-2 md:flex-row md:items-baseline">
+              <Button
+                variant="lightNeutral"
+                className="text-theme-content-subtle dark:text-dark-theme-content-subtle opacity-1 flex flex-col gap-2 rounded-none border-0 py-0 md:flex-row md:items-baseline"
+                disabled={!dayMode}
+                onClick={() => onNavWeekdayClick(day)}
+              >
                 <span>{day.format('ddd')}</span>
 
                 <b
@@ -97,8 +97,8 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
                 >
                   {day.format('D')}
                 </b>
-              </div>
-            </Button>
+              </Button>
+            </div>
           )
         })}
       </div>

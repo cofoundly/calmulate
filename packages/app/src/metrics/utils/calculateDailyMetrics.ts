@@ -2,7 +2,7 @@ import { filterEventsByDateRange } from '@/calendar/utils/filterEventsByDateRang
 import { date } from '@/date'
 
 import { CalendarEvent, CalendarEventCategoryId } from '../../calendar/models'
-import { MetricsSettings } from '../hooks/useMetricsSettings'
+import { MetricSettings } from '../hooks/useMetricSettings'
 
 const hasBackToBackMeetings = ({
   events,
@@ -379,13 +379,13 @@ const hasSocialEventsScheduled = ({
   return events.some(event => socialCategories.includes(event.category))
 }
 
-export const calculateDailyScores = (
+export const calculateDailyMetrics = (
   events: CalendarEvent[],
-  settings: MetricsSettings,
+  settings: MetricSettings,
 ): {
-  stressScore: number
-  productivityScore: number
-  balanceScore: number
+  stress: number
+  productivity: number
+  balance: number
 } => {
   // stress criteria
   const backToBackMeetings = hasBackToBackMeetings({
@@ -447,7 +447,7 @@ export const calculateDailyScores = (
     lastMinuteWorkAdditionsToCalendar,
   ]
   const stressPoints = stressCriteria.filter(criteria => criteria).length
-  const stressScore = Math.round((100 * stressPoints) / stressCriteria.length)
+  const stressMetric = Math.round((100 * stressPoints) / stressCriteria.length)
 
   // productivity criteria
   const scheduledFocusTime = hasScheduledFocusTime({ events, focusedWorkCategories: settings.focusedWorkCategories })
@@ -482,7 +482,7 @@ export const calculateDailyScores = (
     noOverlappingEvents,
   ]
   const productivityPoints = productivityCriteria.filter(criteria => criteria).length
-  const productivityScore = Math.round((100 * productivityPoints) / productivityCriteria.length)
+  const productivityMetric = Math.round((100 * productivityPoints) / productivityCriteria.length)
 
   // balance criteria
   const sticksToDefinedWorkingHours =
@@ -523,11 +523,11 @@ export const calculateDailyScores = (
     regularBreaksAndDowntime,
   ]
   const balancePoints = balanceCriteria.filter(criteria => criteria).length
-  const balanceScore = Math.round((100 * balancePoints) / balanceCriteria.length)
+  const balanceMetric = Math.round((100 * balancePoints) / balanceCriteria.length)
 
   return {
-    stressScore,
-    productivityScore,
-    balanceScore,
+    stress: stressMetric,
+    productivity: productivityMetric,
+    balance: balanceMetric,
   }
 }

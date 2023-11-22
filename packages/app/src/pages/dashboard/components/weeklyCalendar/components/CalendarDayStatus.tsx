@@ -4,8 +4,8 @@ import React, { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { CalendarEvent } from '@/calendar/models'
-import { MetricsSettings } from '@/metrics/hooks/useMetricsSettings'
-import { calculateDailyScores } from '@/metrics/utils/calculateDailyScores'
+import { MetricSettings } from '@/metrics/hooks/useMetricSettings'
+import { calculateDailyMetrics } from '@/metrics/utils/calculateDailyMetrics'
 
 const getScoreColor = ({
   score,
@@ -31,33 +31,33 @@ const getScoreColor = ({
 
 type Props = ComponentPropsWithoutRef<'div'> & {
   events: CalendarEvent[]
-  metricsSettings: MetricsSettings
+  metricsSettings: MetricSettings
   loading?: boolean
 }
 
 // TODO: SS it would be so cool if we could animate a 10/10 state, like the user achieved something great, because they did!
 export const CalendarDayStatus = ({ className = '', events, metricsSettings, loading, ...props }: Props) => {
-  const dailyScores = calculateDailyScores(events, metricsSettings)
+  const dailyMetrics = calculateDailyMetrics(events, metricsSettings)
   const stressColor = getScoreColor({
-    score: dailyScores.stressScore,
+    score: dailyMetrics.stress,
     settingHigh: metricsSettings.stressHigh,
     settingAverage: metricsSettings.stressAverage,
     inverted: true,
   })
   const productivityColor = getScoreColor({
-    score: dailyScores.productivityScore,
+    score: dailyMetrics.productivity,
     settingHigh: metricsSettings.productivityHigh,
     settingAverage: metricsSettings.productivityAverage,
   })
   const balanceColor = getScoreColor({
-    score: dailyScores.balanceScore,
+    score: dailyMetrics.balance,
     settingHigh: metricsSettings.balanceHigh,
     settingAverage: metricsSettings.balanceAverage,
   })
 
   return (
     <div className={twMerge('flex flex-wrap items-center justify-center gap-2', className)} {...props}>
-      <ProgressCircle size="xs" color={loading ? 'gray' : stressColor} value={loading ? 0 : dailyScores.stressScore}>
+      <ProgressCircle size="xs" color={loading ? 'gray' : stressColor} value={loading ? 0 : dailyMetrics.stress}>
         <HeartIcon
           className={twMerge(
             'h-4 w-4',
@@ -71,7 +71,7 @@ export const CalendarDayStatus = ({ className = '', events, metricsSettings, loa
       <ProgressCircle
         size="xs"
         color={loading ? 'gray' : productivityColor}
-        value={loading ? 0 : dailyScores.productivityScore}
+        value={loading ? 0 : dailyMetrics.productivity}
       >
         <BriefcaseIcon
           className={twMerge(
@@ -83,7 +83,7 @@ export const CalendarDayStatus = ({ className = '', events, metricsSettings, loa
         />
       </ProgressCircle>
 
-      <ProgressCircle size="xs" color={loading ? 'gray' : balanceColor} value={loading ? 0 : dailyScores.balanceScore}>
+      <ProgressCircle size="xs" color={loading ? 'gray' : balanceColor} value={loading ? 0 : dailyMetrics.balance}>
         <ScaleIcon
           className={twMerge(
             'h-4 w-4',
