@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { features } from '@/features'
 import { QueryKeys } from '@/types'
 
 import { getSubscriptionInfo } from '../api/getSubscriptionInfo'
@@ -14,7 +15,7 @@ export const useSubscriptionInfo = () => {
   const query = useQuery({
     queryKey: [QueryKeys.SubscriptionInfo],
     queryFn: () => (subscriptionId ? getSubscriptionInfo(subscriptionId) : undefined),
-    enabled: Boolean(subscriptionId),
+    enabled: Boolean(features.subscriptions && subscriptionId),
   })
 
   return {

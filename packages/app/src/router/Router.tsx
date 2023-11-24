@@ -1,6 +1,13 @@
 import { ErrorBoundary } from '@sentry/react'
-import React from 'react'
-import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom'
+import React, { Fragment } from 'react'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+  Outlet,
+  Route,
+  RouterProvider,
+} from 'react-router-dom'
 
 import { AuthenticatedLayout } from '@/components/authenticatedLayout/AuthenticatedLayout'
 import { MainLayout } from '@/components/mainLayout/MainLayout'
@@ -9,6 +16,7 @@ import { SubscriptionLayout } from '@/components/subscriptionLayout/Subscription
 import { TeamAdminLayout } from '@/components/teamAdminLayout/TeamAdminLayout'
 import { TeamPlanLayout } from '@/components/teamPlanLayout/TeamPlanLayout'
 import { UnauthenticatedLayout } from '@/components/unauthenticatedLayout/UnauthenticatedLayout'
+import { features } from '@/features'
 import { Dashboard } from '@/pages/dashboard'
 import { ForgotPassword } from '@/pages/forgotPassword'
 import { SettingsAccount } from '@/pages/settings/account'
@@ -43,7 +51,7 @@ const router = createBrowserRouter(
 
       <Route element={<AuthenticatedLayout />} errorElement={errorElement}>
         <Route element={<MainLayout />} errorElement={errorElement}>
-          <Route element={<SubscriptionLayout />} errorElement={errorElement}>
+          <Route element={features.subscriptions ? <SubscriptionLayout /> : <Outlet />} errorElement={errorElement}>
             <Route path={routes.dashboard} element={<Dashboard />} errorElement={errorElement} />
           </Route>
 
@@ -56,11 +64,17 @@ const router = createBrowserRouter(
 
             <Route path={routes.settingsAccount} element={<SettingsAccount />} errorElement={errorElement} />
 
-            <Route path={routes.settingsSubscription} element={<SettingsSubscription />} errorElement={errorElement} />
+            {features.subscriptions && (
+              <Route
+                path={routes.settingsSubscription}
+                element={<SettingsSubscription />}
+                errorElement={errorElement}
+              />
+            )}
 
             <Route path={routes.settingsCalendars} element={<SettingsCalendars />} errorElement={errorElement} />
 
-            <Route element={<SubscriptionLayout />} errorElement={errorElement}>
+            <Route element={features.subscriptions ? <SubscriptionLayout /> : <Outlet />} errorElement={errorElement}>
               <Route element={<TeamPlanLayout />} errorElement={errorElement}>
                 <Route path={routes.settingsTeam} element={<SettingsTeam />} errorElement={errorElement} />
 

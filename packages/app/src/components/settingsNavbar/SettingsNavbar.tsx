@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useSignOut } from '@/auth/hooks/useSignOut'
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
 import { useHasTeamPlan } from '@/billing/hooks/useHasTeamPlan'
+import { features } from '@/features'
 import { routes, TEAM_ID_PARAM } from '@/router/routes'
 import { useTeams } from '@/teams/hooks/useTeams'
 
@@ -23,16 +24,17 @@ export const SettingsNavbar = () => {
   const teamsPageDisabled =
     hasActiveSubscriptionLoading || !hasActiveSubscription || hasTeamPlanLoading || !hasTeamPlan || teamsLoading
 
+  const subscriptionItem = {
+    name: 'Subscription',
+    href: routes.settingsSubscription,
+    active: location.pathname.includes(routes.settingsSubscription),
+  }
+
   const items = [
     {
       name: 'Account',
       href: routes.settingsAccount,
       active: location.pathname.includes(routes.settingsAccount),
-    },
-    {
-      name: 'Subscription',
-      href: routes.settingsSubscription,
-      active: location.pathname.includes(routes.settingsSubscription),
     },
     {
       name: 'Calendars',
@@ -46,6 +48,10 @@ export const SettingsNavbar = () => {
       disabled: teamsPageDisabled,
     },
   ]
+
+  if (features.subscriptions) {
+    items.splice(1, 0, subscriptionItem)
+  }
 
   return (
     <Header>
