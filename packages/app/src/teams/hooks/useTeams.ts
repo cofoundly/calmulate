@@ -1,13 +1,18 @@
 import { useQueries, useQuery } from '@tanstack/react-query'
 import { TeamWithMembers } from 'types'
 
+import { features } from '@/features'
 import { getTeams } from '@/teams/api/getTeams'
 import { getTeamMembersQueryKey, QueryKeys } from '@/types'
 
 import { getTeamMembers } from '../api/getTeamMembers'
 
 export const useTeams = () => {
-  const { data: teams, ...teamsQuery } = useQuery({ queryKey: [QueryKeys.Teams], queryFn: getTeams })
+  const { data: teams, ...teamsQuery } = useQuery({
+    queryKey: [QueryKeys.Teams],
+    queryFn: getTeams,
+    enabled: features.teams,
+  })
   const teamMembersQueries = useQueries({
     queries:
       teams?.map(team => ({

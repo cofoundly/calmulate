@@ -30,6 +30,13 @@ export const SettingsNavbar = () => {
     active: location.pathname.includes(routes.settingsSubscription),
   }
 
+  const teamItem = {
+    name: 'Team',
+    href: routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId),
+    active: location.pathname.includes(routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId)),
+    disabled: teamsPageDisabled,
+  }
+
   const items = [
     {
       name: 'Account',
@@ -41,16 +48,14 @@ export const SettingsNavbar = () => {
       href: routes.settingsCalendars,
       active: location.pathname.includes(routes.settingsCalendars),
     },
-    {
-      name: 'Team',
-      href: routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId),
-      active: location.pathname.includes(routes.settingsTeam.replace(TEAM_ID_PARAM, defaultTeamId)),
-      disabled: teamsPageDisabled,
-    },
   ]
 
   if (features.subscriptions) {
     items.splice(1, 0, subscriptionItem)
+  }
+
+  if (features.teams) {
+    items.splice(2, 0, teamItem)
   }
 
   return (

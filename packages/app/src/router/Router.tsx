@@ -74,27 +74,33 @@ const router = createBrowserRouter(
 
             <Route path={routes.settingsCalendars} element={<SettingsCalendars />} errorElement={errorElement} />
 
-            <Route element={features.subscriptions ? <SubscriptionLayout /> : <Outlet />} errorElement={errorElement}>
-              <Route element={<TeamPlanLayout />} errorElement={errorElement}>
-                <Route path={routes.settingsTeam} element={<SettingsTeam />} errorElement={errorElement} />
+            {features.teams && (
+              <Route element={features.subscriptions ? <SubscriptionLayout /> : <Outlet />} errorElement={errorElement}>
+                <Route element={<TeamPlanLayout />} errorElement={errorElement}>
+                  <Route path={routes.settingsTeam} element={<SettingsTeam />} errorElement={errorElement} />
 
-                <Route element={<TeamAdminLayout />} errorElement={errorElement}>
-                  <Route
-                    path={routes.settingsInviteTeamMembers}
-                    element={<SettingsInviteTeamMembers />}
-                    errorElement={errorElement}
-                  />
-
-                  <Route path={routes.settingsTeamMember} element={<SettingsTeamMember />} errorElement={errorElement}>
+                  <Route element={<TeamAdminLayout />} errorElement={errorElement}>
                     <Route
-                      path={routes.settingsRemoveTeamMember}
-                      element={<SettingsRemoveTeamMember />}
+                      path={routes.settingsInviteTeamMembers}
+                      element={<SettingsInviteTeamMembers />}
                       errorElement={errorElement}
                     />
+
+                    <Route
+                      path={routes.settingsTeamMember}
+                      element={<SettingsTeamMember />}
+                      errorElement={errorElement}
+                    >
+                      <Route
+                        path={routes.settingsRemoveTeamMember}
+                        element={<SettingsRemoveTeamMember />}
+                        errorElement={errorElement}
+                      />
+                    </Route>
                   </Route>
                 </Route>
               </Route>
-            </Route>
+            )}
 
             <Route path="*" element={<Navigate to={routes.settingsAccount} />} />
           </Route>

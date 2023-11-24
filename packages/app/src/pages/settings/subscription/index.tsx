@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
 import { useIsSubscriptionOwner } from '@/billing/hooks/useIsSubscriptionOwner'
+import { features } from '@/features'
 
 import { ManagedSubscriptionSection } from './components/managedSubscriptionSection/ManagedSubscriptionSection'
 import { Pricing } from './components/pricing/Pricing'
@@ -51,7 +52,7 @@ export const SettingsSubscription = () => {
 
       <SubscriptionDetailsSection />
 
-      <SubscriptionSeatsSection />
+      {features.teams && <SubscriptionSeatsSection />}
     </div>
   )
 }
