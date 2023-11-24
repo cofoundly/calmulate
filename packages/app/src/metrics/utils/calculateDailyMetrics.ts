@@ -350,6 +350,23 @@ const hasSocialEventsScheduled = ({
 }
 
 export const calculateDailyMetrics = (events: CalendarEvent[], settings: MetricSettings) => {
+  if (!events.length) {
+    return {
+      stress: {
+        score: 0,
+        criteria: {},
+      },
+      productivity: {
+        score: 0,
+        criteria: {},
+      },
+      balance: {
+        score: 0,
+        criteria: {},
+      },
+    }
+  }
+
   // stress criteria
   const backToBackMeetings = hasBackToBackMeetings({
     events,
