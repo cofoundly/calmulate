@@ -5,6 +5,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
 import { useIsSubscriptionOwner } from '@/billing/hooks/useIsSubscriptionOwner'
+import { features } from '@/features'
 import { cleanUpAfterEach } from '@/test/cleanUpAfterEach'
 import { MockAppProvider } from '@/test/MockAppProvider'
 
@@ -124,6 +125,9 @@ describe('SettingsSubscription', () => {
     )
 
     expect(screen.getByTestId(MockTestIds.SubscriptionDetailsSection)).toBeInTheDocument()
-    expect(screen.getByTestId(MockTestIds.SubscriptionSeatsSection)).toBeInTheDocument()
+
+    if (features.teams) {
+      expect(screen.getByTestId(MockTestIds.SubscriptionSeatsSection)).toBeInTheDocument()
+    }
   })
 })
