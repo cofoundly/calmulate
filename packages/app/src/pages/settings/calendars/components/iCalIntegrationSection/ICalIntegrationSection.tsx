@@ -78,7 +78,7 @@ export const ICalIntegrationSection = () => {
 
         <Button
           type="submit"
-          icon={isFetched && <CheckIcon className="h-auto text-inherit" />}
+          icon={isFetched && <CheckIcon className="h-auto text-inherit dark:text-inherit" />}
           loading={isLoading}
           disabled={!validateUrl(url) || isLoading || isFetched}
         >
