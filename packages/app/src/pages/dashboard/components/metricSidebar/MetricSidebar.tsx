@@ -32,8 +32,15 @@ export const MetricSidebar = () => {
   }, [setMetricSidebar])
 
   return (
-    <Popover open={metricSidebar.open} position="right" showBackdrop={false} showCloseIcon={false} onClose={onClose}>
-      <div className="bg-theme-background dark:bg-dark-theme-background border-theme-border dark:border-dark-theme-border flex w-screen flex-col gap-y-4 overflow-y-auto border-l p-6">
+    <Popover
+      className="overflow-hidden"
+      open={metricSidebar.open}
+      position="right"
+      showBackdrop={false}
+      showCloseIcon={false}
+      onClose={onClose}
+    >
+      <div className="bg-theme-background dark:bg-dark-theme-background border-theme-border dark:border-dark-theme-border flex w-screen flex-col gap-y-4 border-l p-6">
         <div className="flex items-center justify-between gap-x-8">
           {metric && <MetricProgressIndicator metric={metric} score={score} showDetail size="sm" loading={isLoading} />}
 

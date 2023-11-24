@@ -9,6 +9,7 @@ import { Backdrop } from '../backdrop/Backdrop'
 import { Button } from '../button/Button'
 
 type Props = {
+  className?: string
   open: boolean
   position?: 'left' | 'right'
   showBackdrop?: boolean
@@ -18,6 +19,7 @@ type Props = {
 }
 
 export const Popover = ({
+  className = '',
   open,
   position = 'left',
   showBackdrop = true,
@@ -54,7 +56,7 @@ export const Popover = ({
               animate={{ opacity: 1, transform: `translateX(0%)` }}
               exit={{ opacity: 0, transform: `translateX(${translateX})` }}
             >
-              <div ref={ref} className="relative flex max-w-sm flex-1 overflow-hidden shadow-xl">
+              <div ref={ref} className={twMerge('relative flex max-w-sm flex-1 shadow-xl', className)}>
                 {showCloseIcon && (
                   <div
                     className={twMerge(

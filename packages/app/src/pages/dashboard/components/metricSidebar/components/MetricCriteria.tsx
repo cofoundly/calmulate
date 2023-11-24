@@ -39,7 +39,7 @@ export const MetricCriteria = ({ className = '', ...props }: Props) => {
   }
 
   return (
-    <List className={twMerge('', className)} {...props}>
+    <List className={twMerge('overflow-y-auto', className)} {...props}>
       {Object.entries(criteria)
         // sort so that failed tests are on top
         // noting that the stress metric is inverted

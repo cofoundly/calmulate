@@ -22,7 +22,7 @@ export const MetricSuggestions = ({ className = '', ...props }: Props) => {
   }
 
   return (
-    <List className={twMerge('', className)} {...props}>
+    <List className={twMerge('overflow-y-auto', className)} {...props}>
       {Object.entries(criteria)
         .filter(([_, test]) =>
           // the stress metric is inverted
