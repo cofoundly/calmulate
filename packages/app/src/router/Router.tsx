@@ -37,19 +37,21 @@ const errorElement = <ErrorBoundary />
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route element={<UnauthenticatedLayout />} errorElement={errorElement}>
-        <Route path={routes.signUp} element={<SignUp />} errorElement={errorElement} />
+      {features.auth && (
+        <Route element={<UnauthenticatedLayout />} errorElement={errorElement}>
+          <Route path={routes.signUp} element={<SignUp />} errorElement={errorElement} />
 
-        <Route path={routes.signIn} element={<SignIn />} errorElement={errorElement} />
+          <Route path={routes.signIn} element={<SignIn />} errorElement={errorElement} />
 
-        <Route path={routes.forgotPassword} element={<ForgotPassword />} errorElement={errorElement} />
+          <Route path={routes.forgotPassword} element={<ForgotPassword />} errorElement={errorElement} />
 
-        <Route path={routes.userManagement} element={<UserManagement />} errorElement={errorElement} />
+          <Route path={routes.userManagement} element={<UserManagement />} errorElement={errorElement} />
 
-        <Route path="*" element={<Navigate to={routes.signIn} />} />
-      </Route>
+          <Route path="*" element={<Navigate to={routes.signIn} />} />
+        </Route>
+      )}
 
-      <Route element={<AuthenticatedLayout />} errorElement={errorElement}>
+      <Route element={features.auth ? <AuthenticatedLayout /> : <Outlet />} errorElement={errorElement}>
         <Route element={<MainLayout />} errorElement={errorElement}>
           <Route element={features.subscriptions ? <SubscriptionLayout /> : <Outlet />} errorElement={errorElement}>
             <Route path={routes.dashboard} element={<Dashboard />} errorElement={errorElement} />
@@ -58,11 +60,13 @@ const router = createBrowserRouter(
           <Route element={<SettingsLayout />} errorElement={errorElement}>
             <Route
               path={routes.settings}
-              element={<Navigate to={routes.settingsAccount} />}
+              element={<Navigate to={features.auth ? routes.settingsAccount : routes.settingsCalendars} />}
               errorElement={errorElement}
             />
 
-            <Route path={routes.settingsAccount} element={<SettingsAccount />} errorElement={errorElement} />
+            {features.auth && (
+              <Route path={routes.settingsAccount} element={<SettingsAccount />} errorElement={errorElement} />
+            )}
 
             {features.subscriptions && (
               <Route
@@ -101,8 +105,6 @@ const router = createBrowserRouter(
                 </Route>
               </Route>
             )}
-
-            <Route path="*" element={<Navigate to={routes.settingsAccount} />} />
           </Route>
 
           <Route path="*" element={<Navigate to={routes.dashboard} />} />

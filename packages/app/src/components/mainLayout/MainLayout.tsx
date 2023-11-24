@@ -5,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { isExternalLink, useLink } from 'utils'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
+import { features } from '@/features'
 import { routes } from '@/router/routes'
 import { useSidebarOpen } from '@/sidebar/hooks/useSidebarOpen'
 
@@ -26,7 +27,7 @@ export const MainLayout = () => {
       href: routes.dashboard,
       icon: <HomeModernIcon />,
       active: location.pathname === routes.dashboard,
-      disabled: hasActiveSubscriptionLoading || !hasActiveSubscription,
+      disabled: features.subscriptions && (hasActiveSubscriptionLoading || !hasActiveSubscription),
     },
     {
       name: 'Settings',
