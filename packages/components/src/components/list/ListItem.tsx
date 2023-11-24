@@ -8,7 +8,7 @@ type Props = ComponentPropsWithoutRef<'li'>
 export const ListItem = ({ className = '', children }: Props) => {
   return (
     <li className={twMerge('py-2', className)}>
-      <SmallText className="flex justify-between">{children}</SmallText>
+      <SmallText className="flex gap-x-4">{children}</SmallText>
     </li>
   )
 }

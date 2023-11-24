@@ -22,8 +22,7 @@ export type MetricSettings = {
   minVarietyInWorkEvents: number
   maxWorkBlockDuration: number
   minEffectiveBreakDuration: number
-  minBufferTimeBetweenWorkEvents: number
-  cutOffTime: string
+  dailyCutOffTime: string
   workCategories: CalendarEventCategoryId[]
   meetingCategories: CalendarEventCategoryId[]
   planningCategories: CalendarEventCategoryId[]
@@ -36,12 +35,12 @@ export type MetricSettings = {
 }
 
 const atom = atomWithStorage<MetricSettings>('metricsSettings', {
-  stressHigh: 70,
-  stressAverage: 40,
-  productivityHigh: 70,
-  productivityAverage: 40,
-  balanceHigh: 70,
-  balanceAverage: 40,
+  stressHigh: 7,
+  stressAverage: 1,
+  productivityHigh: 7,
+  productivityAverage: 4,
+  balanceHigh: 7,
+  balanceAverage: 4,
   workStartTime: '09:00', // in "HH:mm" format
   workEndTime: '17:00', // in "HH:mm" format
   lunchBreakStartTime: '12:00', // in "HH:mm" format
@@ -53,9 +52,8 @@ const atom = atomWithStorage<MetricSettings>('metricsSettings', {
   minNoticeForWorkEvents: 60, // in minutes
   minVarietyInWorkEvents: 1, // in number of events
   maxWorkBlockDuration: 90, // in minutes
-  minEffectiveBreakDuration: 5, // in minutes
-  minBufferTimeBetweenWorkEvents: 10, // in minutes
-  cutOffTime: '19:00', // in 'HH:mm' format
+  minEffectiveBreakDuration: 10, // in minutes
+  dailyCutOffTime: '19:00', // in 'HH:mm' format
   workCategories: [
     'meeting',
     'focusedWork',

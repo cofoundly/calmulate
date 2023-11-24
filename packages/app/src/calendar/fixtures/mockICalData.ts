@@ -236,7 +236,7 @@ DTSTAMP:${timeIncrement(thursday, 15).toISOString()}
 DTSTART:${timeIncrement(thursday, 15).toISOString()}
 DTEND:${timeIncrement(thursday, 16).toISOString()}
 SUMMARY:Personal Development Time
-DESCRIPTION:Time allocated for personal growth activities or learning.
+DESCRIPTION:Time allocated for personal growth events or learning.
 LOCATION:Desk
 END:VEVENT
 BEGIN:VEVENT

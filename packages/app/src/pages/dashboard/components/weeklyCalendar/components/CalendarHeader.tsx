@@ -28,34 +28,22 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
 
   const onPreviousWeekClick = useCallback(() => {
     setDateRange({
-      startDate: date(startDate)
-        .subtract(1, dayMode ? 'day' : 'week')
-        .toISOString(),
-      endDate: date(endDate)
-        .subtract(1, dayMode ? 'day' : 'week')
-        .toISOString(),
+      startDate: date(startDate).subtract(1, dayMode ? 'day' : 'week'),
+      endDate: date(endDate).subtract(1, dayMode ? 'day' : 'week'),
     })
   }, [setDateRange, startDate, dayMode, endDate])
 
   const onThisWeekClick = useCallback(() => {
     setDateRange({
-      startDate: date()
-        .startOf(dayMode ? 'day' : 'week')
-        .toISOString(),
-      endDate: date()
-        .endOf(dayMode ? 'day' : 'week')
-        .toISOString(),
+      startDate: date().startOf(dayMode ? 'day' : 'week'),
+      endDate: date().endOf(dayMode ? 'day' : 'week'),
     })
   }, [dayMode, setDateRange])
 
   const onNextWeekClick = useCallback(() => {
     setDateRange({
-      startDate: date(startDate)
-        .add(1, dayMode ? 'day' : 'week')
-        .toISOString(),
-      endDate: date(endDate)
-        .add(1, dayMode ? 'day' : 'week')
-        .toISOString(),
+      startDate: date(startDate).add(1, dayMode ? 'day' : 'week'),
+      endDate: date(endDate).add(1, dayMode ? 'day' : 'week'),
     })
   }, [setDateRange, startDate, dayMode, endDate])
 

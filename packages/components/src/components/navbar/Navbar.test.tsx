@@ -10,18 +10,15 @@ type NavigationItem = ComponentProps<typeof Navbar>['items'][0]
 const ITEMS: NavigationItem[] = [
   {
     name: 'Home',
-    href: '/',
     active: true,
   },
   {
     name: 'Dashboard',
-    href: '/dashboard',
     active: false,
     disabled: true,
   },
   {
     name: 'Settings',
-    href: '/settings',
     active: false,
   },
 ]
@@ -51,6 +48,6 @@ describe('Navbar', () => {
 
     fireEvent.click(button)
 
-    expect(onClick).toHaveBeenCalledWith(ITEMS[2].href)
+    expect(onClick).toHaveBeenCalledWith(ITEMS[2])
   })
 })

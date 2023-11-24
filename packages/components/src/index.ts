@@ -24,7 +24,7 @@ import { HugeText } from './components/hugeText/HugeText'
 import { Icon } from './components/icon/Icon'
 import { IconPicker } from './components/iconPicker/IconPicker'
 import { LabelText } from './components/labelText/LabelText'
-import { List } from './components/list/List'
+import { List, ListItem } from './components/list/List'
 import { Loading } from './components/loading/Loading'
 import { Logo } from './components/logo/Logo'
 import { Navbar } from './components/navbar/Navbar'
@@ -73,6 +73,7 @@ export {
   IconPicker,
   LabelText,
   List,
+  ListItem,
   Loading,
   Logo,
   Navbar,

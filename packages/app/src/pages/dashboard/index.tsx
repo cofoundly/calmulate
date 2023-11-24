@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Header } from '@/components/header/Header'
 
+import { MetricSidebar } from './components/metricSidebar/MetricSidebar'
 import { WeeklyCalendar } from './components/weeklyCalendar/WeeklyCalendar'
 
 export const Dashboard = () => {
@@ -10,6 +11,8 @@ export const Dashboard = () => {
       <Header className="lg:hidden" />
 
       <WeeklyCalendar />
+
+      <MetricSidebar />
     </>
   )
 }

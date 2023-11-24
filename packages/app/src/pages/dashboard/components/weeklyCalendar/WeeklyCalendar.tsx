@@ -5,6 +5,7 @@ import { useCalendarDateRange } from '@/calendar/hooks/useCalendarDateRange'
 import { useCalendarEventCategories } from '@/calendar/hooks/useCalendarEventCategories'
 import { useCalendarEvents } from '@/calendar/hooks/useCalendarEvents'
 import { date } from '@/date'
+import { useMetricSidebar } from '@/metrics/hooks/useMetricSiderbar'
 
 import { CalendarEvent } from './components/CalendarEvent'
 import { CalendarHeader } from './components/CalendarHeader'
@@ -41,6 +42,7 @@ export const WeeklyCalendar = ({ className = '', ...props }: Props) => {
   const [dateRange] = useCalendarDateRange()
   const { data: events } = useCalendarEvents(dateRange)
   const [categories] = useCalendarEventCategories()
+  const [metricSidebar] = useMetricSidebar()
 
   useCalendarResponsiveDateRange()
 
@@ -69,17 +71,24 @@ export const WeeklyCalendar = ({ className = '', ...props }: Props) => {
                 className="col-start-1 col-end-2 row-start-1 grid grid-cols-1 sm:grid-cols-7 sm:pr-8"
                 style={{ gridTemplateRows: `1.75rem repeat(${EVENT_ROWS}, minmax(0, 1fr)) auto` }}
               >
-                {events.map(event => (
-                  <li
-                    key={event.id}
-                    className={`relative mt-px flex sm:col-start-${getEventColStart(event.startDate)}`}
-                    style={{
-                      gridRow: getEventGridRow({ startDate: event.startDate, endDate: event.endDate }),
-                    }}
-                  >
-                    <CalendarEvent className="absolute inset-1" event={event} category={categories[event.category]} />
-                  </li>
-                ))}
+                {events.map(event => {
+                  const isMetricSidebarOpenForDay = metricSidebar.date?.isSame(event.startDate, 'day')
+
+                  return (
+                    <li
+                      key={event.id}
+                      className={twMerge(
+                        `relative mt-px flex sm:col-start-${getEventColStart(event.startDate)}`,
+                        metricSidebar.open && !isMetricSidebarOpenForDay ? 'opacity-50' : '',
+                      )}
+                      style={{
+                        gridRow: getEventGridRow({ startDate: event.startDate, endDate: event.endDate }),
+                      }}
+                    >
+                      <CalendarEvent className="absolute inset-1" event={event} category={categories[event.category]} />
+                    </li>
+                  )
+                })}
               </ol>
             </div>
           </div>

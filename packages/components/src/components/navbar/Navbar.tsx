@@ -1,22 +1,22 @@
-import React, { ComponentPropsWithoutRef, ReactNode } from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { Button } from '../button/Button'
 
-type Props = {
-  items: {
-    name: string
-    href: string
-    icon?: ReactNode
-    active?: boolean
-    disabled?: boolean
-  }[]
-  onClick?: (href: string) => void
+type Props<T> = {
+  items: T[]
+  onClick?: (item: T) => void
 } & Omit<ComponentPropsWithoutRef<'ul'>, 'onClick'>
 
-export const Navbar = ({ className, items, onClick, children, ...props }: Props) => {
+export const Navbar = <T extends { name: string; active?: boolean; disabled?: boolean }>({
+  className,
+  items,
+  onClick,
+  children,
+  ...props
+}: Props<T>) => {
   return (
-    <ul className={twMerge(`flex flex-1 gap-x-2 overflow-x-auto lg:gap-x-4`, className)} {...props}>
+    <ul className={twMerge(`flex flex-1 overflow-x-auto`, className)} {...props}>
       {items.map(item => (
         <li key={item.name}>
           <Button
@@ -29,9 +29,9 @@ export const Navbar = ({ className, items, onClick, children, ...props }: Props)
             variant="lightNeutral"
             disabled={item.disabled}
             onClick={() => {
-              // navigate to the route if we're not already on that route
+              // call onlick only if the item is not active
               if (!item.active && onClick) {
-                onClick(item.href)
+                onClick(item)
               }
             }}
           >

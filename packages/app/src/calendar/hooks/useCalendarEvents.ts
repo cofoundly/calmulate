@@ -1,7 +1,9 @@
+import { date } from '@/date'
+
 import { filterEventsByDateRange } from '../utils/filterEventsByDateRange'
 import { useICalCalendarEvents } from './useICalCalendarEvents'
 
-export const useCalendarEvents = (dateRange?: { startDate: string; endDate: string }) => {
+export const useCalendarEvents = (dateRange?: { startDate: date.Dayjs; endDate: date.Dayjs }) => {
   // fetch the iCal calendar data
   const { data: iCalCalendarEvents, isFetching, ...iCalCalendarEventsQuery } = useICalCalendarEvents()
 

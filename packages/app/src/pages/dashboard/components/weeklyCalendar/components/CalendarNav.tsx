@@ -3,14 +3,11 @@ import React, { ComponentPropsWithoutRef, forwardRef, useCallback } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 import { useCalendarDateRange } from '@/calendar/hooks/useCalendarDateRange'
-import { useCalendarEvents } from '@/calendar/hooks/useCalendarEvents'
-import { filterEventsByDateRange } from '@/calendar/utils/filterEventsByDateRange'
 import { getCurrentWeekdays } from '@/calendar/utils/getCurrentWeekdays'
 import { isDayMode } from '@/calendar/utils/isDayMode'
 import { date } from '@/date'
-import { useMetricSettings } from '@/metrics/hooks/useMetricSettings'
 
-import { CalendarDayStatus } from './CalendarDayStatus'
+import { CalendarDayMetrics } from './CalendarDayMetrics'
 
 const WEEKDAYS = getCurrentWeekdays()
 
@@ -21,20 +18,12 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
 
   const dayMode = isDayMode({ startDate, endDate })
 
-  // using these hooks here are purely an optimisation for CalendarDayStatus
-  const { data: calendarEvents, isLoading: calendarEventsLoading } = useCalendarEvents({
-    // we need the full week's event's in case we are in day mode
-    startDate: dayMode ? date(startDate).startOf('isoWeek').toISOString() : startDate,
-    endDate: dayMode ? date(startDate).endOf('isoWeek').toISOString() : endDate,
-  })
-  const [metricsSettings] = useMetricSettings()
-
   const onNavWeekdayClick = useCallback(
     (weekday: typeof WEEKDAYS[0]) => {
       // set the date range to that day
       setDateRange({
-        startDate: weekday.startOf('day').toISOString(),
-        endDate: weekday.endOf('day').toISOString(),
+        startDate: weekday.startOf('day'),
+        endDate: weekday.endOf('day'),
       })
     },
     [setDateRange],
@@ -64,18 +53,9 @@ export const CalendarNav = forwardRef(({ className = '', ...props }: Props, ref:
 
           const dayModeDay = dayMode && day.isSame(date(startDate), 'day')
 
-          const events = filterEventsByDateRange({
-            events: calendarEvents,
-            startDate: day.startOf('day').toISOString(),
-            endDate: day.endOf('day').toISOString(),
-          })
-          const hasEvents = events.length
-
           return (
             <div key={weekday.toISOString()} className="flex flex-col justify-end gap-y-4 py-2">
-              {hasEvents ? (
-                <CalendarDayStatus events={events} metricsSettings={metricsSettings} loading={calendarEventsLoading} />
-              ) : null}
+              <CalendarDayMetrics day={day} />
 
               <Button
                 variant="lightNeutral"

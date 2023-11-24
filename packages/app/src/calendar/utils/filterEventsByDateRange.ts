@@ -8,11 +8,11 @@ export const filterEventsByDateRange = ({
   endDate,
 }: {
   events: CalendarEvent[]
-  startDate: string
-  endDate: string
+  startDate: date.Dayjs
+  endDate: date.Dayjs
 }) => {
-  const start = date(startDate).startOf('day')
-  const end = date(endDate).endOf('day')
+  const start = startDate.startOf('day')
+  const end = endDate.endOf('day')
 
   return events.filter(event => {
     const eventStart = date(event.startDate)

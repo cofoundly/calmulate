@@ -3,6 +3,7 @@ import { date } from '@/date'
 
 import { CalendarEvent, CalendarEventCategoryId } from '../../calendar/models'
 import { MetricSettings } from '../hooks/useMetricSettings'
+import { MetricCriteria } from '../models'
 
 const hasBackToBackMeetings = ({
   events,
@@ -34,7 +35,7 @@ const getTimeForDay = ({ day, time }: { day: string; time: string }) => {
   return date(day).startOf('day').hour(hours).minute(minutes)
 }
 
-const hasWorkActivitiesBeforeWorkingHours = ({
+const hasWorkEventsBeforeWorkingHours = ({
   events,
   workStartTime,
   workCategories,
@@ -48,7 +49,7 @@ const hasWorkActivitiesBeforeWorkingHours = ({
     .some(event => date(event.startDate).isBefore(getTimeForDay({ day: event.startDate, time: workStartTime })))
 }
 
-const hasWorkActivitiesDuringLunchBreak = ({
+const hasWorkEventsDuringLunchBreak = ({
   events,
   lunchBreakStartTime,
   lunchBreakEndTime,
@@ -74,7 +75,7 @@ const hasWorkActivitiesDuringLunchBreak = ({
     )
 }
 
-const hasWorkActivitiesAfterWorkingHours = ({
+const hasWorkEventsAfterWorkingHours = ({
   events,
   workEndTime,
   workCategories,
@@ -136,13 +137,13 @@ const hasNoScheduledBreaks = ({
     return false
   }
 
-  const eventsBetweenWorkActivities = filterEventsByDateRange({
+  const eventsBetweenWorkEvents = filterEventsByDateRange({
     events,
-    startDate: workStarted,
-    endDate: workEnded,
+    startDate: date(workStarted),
+    endDate: date(workEnded),
   })
 
-  return !eventsBetweenWorkActivities.some(event => breakCategories.includes(event.category))
+  return !eventsBetweenWorkEvents.some(event => breakCategories.includes(event.category))
 }
 
 const hasUnreasonableDailyWorkingDuration = ({
@@ -262,37 +263,6 @@ const hasEffectiveUseOfBreaks = ({
   return isFollowingBreakEffective
 }
 
-const hasBufferTimeBetweenWorkEvents = ({
-  events,
-  workCategories,
-  minBufferTimeBetweenWorkEvents,
-}: {
-  events: CalendarEvent[]
-  workCategories: CalendarEventCategoryId[]
-  minBufferTimeBetweenWorkEvents: number
-}): boolean => {
-  let realisticSchedulingScore = 0
-  let lastWorkEventEnd: date.Dayjs | null = null
-
-  events.forEach(event => {
-    const eventStart = date(event.startDate)
-    const eventEnd = date(event.endDate)
-
-    // Only consider work-related events for buffer time calculation
-    if (workCategories.includes(event.category)) {
-      // Check if there's adequate buffer time since last work event
-      if (lastWorkEventEnd && eventStart.diff(lastWorkEventEnd, 'minute') < minBufferTimeBetweenWorkEvents) {
-        // Less than 10 minutes buffer
-        realisticSchedulingScore -= 1
-      }
-
-      lastWorkEventEnd = eventEnd
-    }
-  })
-
-  return realisticSchedulingScore === 0
-}
-
 const hasOverlappingEvents = ({ events }: { events: CalendarEvent[] }): boolean => {
   for (let i = 0; i < events.length - 1; i++) {
     const currentEnd = date(events[i].endDate)
@@ -379,32 +349,25 @@ const hasSocialEventsScheduled = ({
   return events.some(event => socialCategories.includes(event.category))
 }
 
-export const calculateDailyMetrics = (
-  events: CalendarEvent[],
-  settings: MetricSettings,
-): {
-  stress: number
-  productivity: number
-  balance: number
-} => {
+export const calculateDailyMetrics = (events: CalendarEvent[], settings: MetricSettings) => {
   // stress criteria
   const backToBackMeetings = hasBackToBackMeetings({
     events,
     meetingCategories: settings.meetingCategories,
     minGapBetweenMeetings: settings.minGapBetweenMeetings,
   })
-  const workActivitiesBeforeWorkingHours = hasWorkActivitiesBeforeWorkingHours({
+  const workEventsBeforeWorkingHours = hasWorkEventsBeforeWorkingHours({
     events,
     workStartTime: settings.workStartTime,
     workCategories: settings.workCategories,
   })
-  const workActivitiesDuringLunch = hasWorkActivitiesDuringLunchBreak({
+  const workEventsDuringLunch = hasWorkEventsDuringLunchBreak({
     events,
     lunchBreakStartTime: settings.lunchBreakStartTime,
     lunchBreakEndTime: settings.lunchBreakEndTime,
     workCategories: settings.workCategories,
   })
-  const workActivitiesAfterWorkingHours = hasWorkActivitiesAfterWorkingHours({
+  const workEventsAfterWorkingHours = hasWorkEventsAfterWorkingHours({
     events,
     workEndTime: settings.workEndTime,
     workCategories: settings.workCategories,
@@ -435,19 +398,20 @@ export const calculateDailyMetrics = (
     minNoticeForWorkEvents: settings.minNoticeForWorkEvents,
   })
 
-  const stressCriteria = [
-    backToBackMeetings,
-    workActivitiesBeforeWorkingHours,
-    workActivitiesDuringLunch,
-    workActivitiesAfterWorkingHours,
-    unreasonableMeetingDurations,
-    unreasonableDailyMeetingDuration,
-    noScheduledBreaksWithinWorkingHours,
-    unreasonableDailyWorkingDuration,
-    lastMinuteWorkAdditionsToCalendar,
-  ]
-  const stressPoints = stressCriteria.filter(criteria => criteria).length
-  const stressMetric = Math.round((100 * stressPoints) / stressCriteria.length)
+  const stressCriteria = {
+    [MetricCriteria.BackToBackMeetings]: backToBackMeetings,
+    [MetricCriteria.WorkEventsBeforeWorkingHours]: workEventsBeforeWorkingHours,
+    [MetricCriteria.WorkEventsDuringLunch]: workEventsDuringLunch,
+    [MetricCriteria.WorkEventsAfterWorkingHours]: workEventsAfterWorkingHours,
+    [MetricCriteria.UnreasonableMeetingDurations]: unreasonableMeetingDurations,
+    [MetricCriteria.UnreasonableDailyMeetingDuration]: unreasonableDailyMeetingDuration,
+    [MetricCriteria.NoScheduledBreaksWithinWorkingHours]: noScheduledBreaksWithinWorkingHours,
+    [MetricCriteria.UnreasonableDailyWorkingDuration]: unreasonableDailyWorkingDuration,
+    [MetricCriteria.LastMinuteWorkAdditionsToCalendar]: lastMinuteWorkAdditionsToCalendar,
+  }
+
+  const stressPoints = Object.values(stressCriteria).filter(criteria => criteria).length
+  const stressScore = Math.round((10 * stressPoints) / Object.keys(stressCriteria).length)
 
   // productivity criteria
   const scheduledFocusTime = hasScheduledFocusTime({ events, focusedWorkCategories: settings.focusedWorkCategories })
@@ -466,27 +430,22 @@ export const calculateDailyMetrics = (
     maxWorkBlockDuration: settings.maxWorkBlockDuration,
     minEffectiveBreakDuration: settings.minEffectiveBreakDuration,
   })
-  const bufferTimeBetweenWorkEvents = hasBufferTimeBetweenWorkEvents({
-    events,
-    workCategories: settings.workCategories,
-    minBufferTimeBetweenWorkEvents: settings.minBufferTimeBetweenWorkEvents,
-  })
   const noOverlappingEvents = !hasOverlappingEvents({ events })
 
-  const productivityCriteria = [
-    scheduledFocusTime,
-    varietyInWorkEvents,
-    scheduledReviewOrPlanningTime,
-    effectiveUseOfBreaks,
-    bufferTimeBetweenWorkEvents,
-    noOverlappingEvents,
-  ]
-  const productivityPoints = productivityCriteria.filter(criteria => criteria).length
-  const productivityMetric = Math.round((100 * productivityPoints) / productivityCriteria.length)
+  const productivityCriteria = {
+    [MetricCriteria.ScheduledFocusTime]: scheduledFocusTime,
+    [MetricCriteria.VarietyInWorkEvents]: varietyInWorkEvents,
+    [MetricCriteria.ScheduledReviewOrPlanningTime]: scheduledReviewOrPlanningTime,
+    [MetricCriteria.EffectiveUseOfBreaks]: effectiveUseOfBreaks,
+    [MetricCriteria.NoOverlappingEvents]: noOverlappingEvents,
+  }
+
+  const productivityPoints = Object.values(productivityCriteria).filter(criteria => criteria).length
+  const productivityScore = Math.round((10 * productivityPoints) / Object.keys(productivityCriteria).length)
 
   // balance criteria
   const sticksToDefinedWorkingHours =
-    !workActivitiesBeforeWorkingHours && !workActivitiesDuringLunch && !workActivitiesAfterWorkingHours
+    !workEventsBeforeWorkingHours && !workEventsDuringLunch && !workEventsAfterWorkingHours
   const personalEventsScheduled = hasPersonalEventsScheduled({
     events,
     personalCategories: settings.personalCategories,
@@ -503,7 +462,7 @@ export const calculateDailyMetrics = (
   })
   const eveningWindDownTime = hasNoEventsAfterCutoff({
     events,
-    cutoffTime: settings.cutOffTime,
+    cutoffTime: settings.dailyCutOffTime,
   })
   const activitiesForPhysicalHealth = hasExerciseEventsScheduled({
     events,
@@ -512,22 +471,32 @@ export const calculateDailyMetrics = (
   const socialOrFamilyTimeScheduled = hasSocialEventsScheduled({ events, socialCategories: settings.socialCategories })
   const regularBreaksAndDowntime = effectiveUseOfBreaks
 
-  const balanceCriteria: boolean[] = [
-    sticksToDefinedWorkingHours,
-    personalEventsScheduled,
-    flexibleWorkSchedule,
-    timeForSelfCare,
-    eveningWindDownTime,
-    activitiesForPhysicalHealth,
-    socialOrFamilyTimeScheduled,
-    regularBreaksAndDowntime,
-  ]
-  const balancePoints = balanceCriteria.filter(criteria => criteria).length
-  const balanceMetric = Math.round((100 * balancePoints) / balanceCriteria.length)
+  const balanceCriteria = {
+    [MetricCriteria.SticksToDefinedWorkingHours]: sticksToDefinedWorkingHours,
+    [MetricCriteria.PersonalEventsScheduled]: personalEventsScheduled,
+    [MetricCriteria.FlexibleWorkSchedule]: flexibleWorkSchedule,
+    [MetricCriteria.TimeForSelfCare]: timeForSelfCare,
+    [MetricCriteria.EveningWindDownTime]: eveningWindDownTime,
+    [MetricCriteria.EventsForPhysicalHealth]: activitiesForPhysicalHealth,
+    [MetricCriteria.SocialOrFamilyTimeScheduled]: socialOrFamilyTimeScheduled,
+    [MetricCriteria.RegularBreaksAndDowntime]: regularBreaksAndDowntime,
+  }
+
+  const balancePoints = Object.values(balanceCriteria).filter(criteria => criteria).length
+  const balanceScore = Math.round((10 * balancePoints) / Object.keys(balanceCriteria).length)
 
   return {
-    stress: stressMetric,
-    productivity: productivityMetric,
-    balance: balanceMetric,
+    stress: {
+      score: stressScore,
+      criteria: stressCriteria,
+    },
+    productivity: {
+      score: productivityScore,
+      criteria: productivityCriteria,
+    },
+    balance: {
+      score: balanceScore,
+      criteria: balanceCriteria,
+    },
   }
 }

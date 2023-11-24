@@ -1,5 +1,5 @@
 import { Button, Navbar } from 'components'
-import React, { ComponentProps } from 'react'
+import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useSignOut } from '@/auth/hooks/useSignOut'
@@ -9,8 +9,6 @@ import { routes, TEAM_ID_PARAM } from '@/router/routes'
 import { useTeams } from '@/teams/hooks/useTeams'
 
 import { Header } from '../header/Header'
-
-type NavigationItem = ComponentProps<typeof Navbar>['items'][0]
 
 export const SettingsNavbar = () => {
   const location = useLocation()
@@ -25,7 +23,7 @@ export const SettingsNavbar = () => {
   const teamsPageDisabled =
     hasActiveSubscriptionLoading || !hasActiveSubscription || hasTeamPlanLoading || !hasTeamPlan || teamsLoading
 
-  const items: NavigationItem[] = [
+  const items = [
     {
       name: 'Account',
       href: routes.settingsAccount,
@@ -53,8 +51,8 @@ export const SettingsNavbar = () => {
     <Header>
       <Navbar
         items={items}
-        onClick={href => {
-          navigate(href)
+        onClick={item => {
+          navigate(item.href)
         }}
       >
         <Button
