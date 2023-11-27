@@ -10,8 +10,8 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "firebase:use": "firebase use",
-    "deploy:staging": "export MODE=staging && firebase deploy --only firestore,functions,hosting:app,hosting:storybook,hosting:website",
-    "deploy:production": "export MODE=production && firebase deploy --only firestore,functions,hosting:app,hosting:website"
+    "deploy:staging": "export MODE=staging && firebase deploy --only hosting:app,hosting:storybook,hosting:website",
+    "deploy:production": "export MODE=production && firebase deploy --only hosting:app,hosting:website"
   },
   "packageManager": "yarn@1.22.19",
   "workspaces": {
