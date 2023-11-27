@@ -5,6 +5,7 @@ import { Button, Logo, SmallText } from 'components'
 import { app } from 'config'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { useLink } from 'utils'
 
 import { routes } from '@/routes'
 import { getDynamicNavItems } from '@/routes/getDynamicNavItems'
@@ -22,6 +23,7 @@ const NAV_LINKS: Array<{ name: string; href: string }> = [
 
 export const Footer = () => {
   const router = useRouter()
+  const link = useLink()
 
   return (
     <footer className="flex flex-col items-center bg-theme-background px-4 dark:bg-dark-theme-background">

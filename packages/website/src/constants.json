@@ -1,250 +1,133 @@
 {
   "header": {
-    "cta": "CTA"
+    "cta": "Join the Waiting List"
   },
   "sections": [
     {
       "type": "hero",
       "image": {
-        "src": "https://via.placeholder.com/200",
-        "alt": "Placeholder image",
-        "width": 200,
-        "height": 200
+        "src": "/calm-swan-1.png",
+        "alt": "Calm swan meditating",
+        "width": 240,
+        "height": 240
       },
-      "heading": "Optional primer heading",
-      "title": "What is this service in a nutshell.",
-      "highlighted": "nutshell",
-      "subtitle": "No X. No boring Y. No boring Z. Just ABC.",
-      "cta": "CTA",
-      "footer": "Usually a guarantee, urgency or social proof."
+      "heading": "The Future of Mindful Productivity",
+      "title": "Your Personal Productivity Coach",
+      "highlighted": "Coach",
+      "subtitle": "No more burnouts. No more stress overload. Just mindful productivity.",
+      "cta": "Join the Waiting List",
+      "footer": "Join early adopters shaping the future of mindful work."
     },
     {
       "type": "features",
       "navTitle": "Features",
-      "title": "Tell me why this service is unique",
-      "highlighted": "unique",
-      "subtitle": "You can describe it in more detail here.",
+      "title": "Discover the Calmulate Difference",
+      "highlighted": "Difference",
+      "subtitle": "Integrating mindfulness seamlessly into your workflow.",
       "sections": [
         {
           "image": {
-            "src": "https://via.placeholder.com/360",
-            "alt": "",
-            "width": 360,
-            "height": 360
-          },
-          "title": "Unique feature 1",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
-          "cta": "CTA",
-          "footer": ""
-        },
-        {
-          "image": {
-            "src": "https://via.placeholder.com/360",
-            "alt": "",
-            "width": 360,
-            "height": 360
-          },
-          "title": "Unique feature 2",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
-          "cta": "",
-          "footer": ""
-        },
-        {
-          "image": {
-            "src": "https://via.placeholder.com/360",
-            "alt": "",
-            "width": 360,
-            "height": 360
-          },
-          "title": "Unique feature 3",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
-          "cta": "",
-          "footer": ""
-        }
-      ]
-    },
-    {
-      "type": "features",
-      "navTitle": "Recent work",
-      "title": "List a few example projects or previous work",
-      "highlighted": "work",
-      "subtitle": "You can describe it in more detail here.",
-      "sections": [
-        {
-          "image": {
-            "src": "https://via.placeholder.com/480",
-            "alt": "",
+            "src": "/stress-criteria.png",
+            "alt": "A screenshot of the Calmulate stress analysis tool indicating various criteria that the stress level is based on",
             "width": 480,
             "height": 480
           },
-          "title": "Unique project 1",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
-          "cta": "CTA",
+          "title": "Data-Driven Insights",
+          "description": "Harness the power of analytics to tailor your work habits for maximum efficiency.",
+          "features": ["Customized Stress Management", "Optimal Work Time Suggestions", "Integration with Wearables"],
+          "cta": "Join the Waiting List",
           "footer": ""
         },
         {
           "image": {
-            "src": "https://via.placeholder.com/480",
-            "alt": "",
+            "src": "/calendar.png",
+            "alt": "A screenshot of the Calmulate calendar indicating levels of stress, productivity and balance for each day",
             "width": 480,
             "height": 480
           },
-          "title": "Unique project 2",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
+          "title": "Smart Calendar Syncing",
+          "description": "Synchronize your routines with Calmulate to find the perfect work-life balance.",
+          "features": ["Automated Mindfulness Reminders", "Efficient Time Blocking", "Seamless Calendar Integration"],
           "cta": "",
           "footer": ""
         },
         {
           "image": {
-            "src": "https://via.placeholder.com/480",
-            "alt": "",
+            "src": "/balance-suggestions.png",
+            "alt": "A screenshot of the Calmulate balance suggestions tool indicating various activities that can be done to reduce stress",
             "width": 480,
             "height": 480
           },
-          "title": "Unique project 3",
-          "description": "Description.",
-          "features": ["Subfeature 1", "Subfeature 2", "Subfeature 3"],
+          "title": "Stress Relief Activities",
+          "description": "Discover activities that reduce stress, curated just for you.",
+          "features": ["Personalized Activity Suggestions", "Progress Tracking", "Community Challenges"],
           "cta": "",
           "footer": ""
-        }
-      ]
-    },
-    {
-      "type": "testimonials",
-      "navTitle": "Testimonials",
-      "title": "Loved by who?",
-      "highlighted": "who",
-      "testimonials": [
-        {
-          "name": "John Doe",
-          "title": "CEO",
-          "company": "Company",
-          "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          "image": "https://gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-        },
-        {
-          "name": "Jane Doe",
-          "title": "CEO",
-          "company": "Company",
-          "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          "image": "https://gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-        },
-        {
-          "name": "Joe Doe",
-          "title": "CEO",
-          "company": "Company",
-          "testimonial": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          "image": "https://gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
         }
       ]
     },
     {
       "type": "howItWorks",
       "navTitle": "How it works",
-      "title": "Simplify this service in 3 easy steps",
-      "highlighted": "easy",
+      "title": "Three Simple Steps to Mindful Productivity",
+      "highlighted": "Productivity",
       "steps": [
         {
-          "title": "Title",
-          "description": "Description."
+          "title": "Sign Up",
+          "description": "Join our waiting list to be among the first to experience mindful productivity."
         },
         {
-          "title": "Title",
-          "description": "Description."
+          "title": "Get Insights",
+          "description": "Receive personalized reports and suggestions based on your work habits and stress levels."
         },
         {
-          "title": "Title",
-          "description": "Description."
+          "title": "Enjoy Balance",
+          "description": "Apply Calmulate's guidance to achieve a healthier work-life harmony."
         }
       ]
     },
     {
-      "type": "pricing",
-      "navTitle": "Pricing",
-      "title": "Insert main selling point here",
-      "highlighted": "Pricing",
-      "subtitle": "Add some supporting info here.",
-      "prices": [
-        {
-          "title": "Plan 1",
-          "description": "Description.",
-          "currency": "USD",
-          "price": 29,
-          "priceInfo": "/ month",
-          "features": ["Feature 1", "Feature 2", "Feature 3"],
-          "highlight": false,
-          "cta": "CTA"
-        },
-        {
-          "title": "Plan 2",
-          "description": "Description.",
-          "currency": "USD",
-          "price": 49,
-          "priceInfo": "/ month",
-          "features": ["Feature 1", "Feature 2", "Feature 3"],
-          "highlight": true,
-          "cta": "CTA"
-        },
-        {
-          "title": "Plan 3",
-          "description": "Description.",
-          "currency": "USD",
-          "price": 99,
-          "priceInfo": "/ month",
-          "features": ["Feature 1", "Feature 2", "Feature 3"],
-          "highlight": false,
-          "cta": "CTA"
-        }
-      ],
-      "footer": ""
-    },
-    {
       "type": "faqs",
       "navTitle": "Faqs",
-      "title": "FAQs",
-      "highlighted": "FAQs",
-      "subtitle": "",
+      "title": "Common Questions",
+      "highlighted": "Questions",
+      "subtitle": "Learn more about Calmulate and our mission.",
       "faqs": [
         {
-          "question": "Question 1",
-          "answer": "Answer."
+          "question": "How does Calmulate help manage stress?",
+          "answer": "Calmulate uses data from your calendar and wearables to suggest optimal work times and stress-relief activities."
         },
         {
-          "question": "Question 2",
-          "answer": "Answer."
+          "question": "Can I use Calmulate with my existing calendar?",
+          "answer": "Yes, Calmulate is designed to integrate with most calendar applications seamlessly."
         },
         {
-          "question": "Question 3",
-          "answer": "Answer."
+          "question": "What makes Calmulate different from other productivity tools?",
+          "answer": "Unlike other tools, Calmulate emphasizes mindfulness and well-being as core components of productivity."
         }
       ]
     },
     {
       "type": "hero",
       "image": {
-        "src": "https://via.placeholder.com/200",
-        "alt": "Placeholder image",
-        "width": 200,
-        "height": 200
+        "src": "/calm-swan-2.png",
+        "alt": "Calm swan meditating",
+        "width": 240,
+        "height": 240
       },
       "heading": "",
-      "title": "Stop doing X (where X is the result of the problem/pain).",
-      "highlighted": "pain",
-      "subtitle": "Start doing Y (where Y is us).",
-      "cta": "CTA",
-      "footer": "Usually a guarantee or urgency."
+      "title": "Say Goodbye to Overwhelm",
+      "highlighted": "Overwhelm",
+      "subtitle": "Embrace the calm efficiency with Calmulate.",
+      "cta": "Join the Waiting List",
+      "footer": "Be part of the movement towards mindful productivity."
     }
   ],
   "footer": {
     "social": {
-      "twitter": "https://twitter.com",
-      "github": "https://github.com",
-      "linkedIn": "https://linkedin.com"
+      "twitter": "",
+      "github": "",
+      "linkedIn": ""
     }
   }
 }

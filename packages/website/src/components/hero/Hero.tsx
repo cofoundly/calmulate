@@ -1,6 +1,7 @@
 import { SmallText } from 'components'
 import Image, { ImageProps } from 'next/image'
 import React from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { AnalyticsPrimaryButtonName } from '@/analytics/models'
 
@@ -20,7 +21,7 @@ export const Hero = ({ variant, image, cta, footer, ...sectionProps }: Props) =>
       prefix={
         image && (
           <Image
-            className="bg-theme-background-subtle dark:bg-dark-theme-background-subtle rounded-lg shadow-lg"
+            className="bg-theme-background-subtle dark:bg-dark-theme-background-subtle rounded-full shadow-lg"
             priority
             {...image}
           />
@@ -41,7 +42,9 @@ export const Hero = ({ variant, image, cta, footer, ...sectionProps }: Props) =>
           )}
 
           {footer && (
-            <SmallText className={variant === 'default' ? 'text-theme-content-inverted' : ''}>{footer}</SmallText>
+            <SmallText className={twMerge('text-center', variant === 'default' ? 'text-theme-content-inverted' : '')}>
+              {footer}
+            </SmallText>
           )}
         </div>
       </div>
