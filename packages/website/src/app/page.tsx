@@ -1,34 +1,52 @@
 import React from 'react'
 
-import { getPrices } from '@/billing/api/getPrices'
-import { getProducts } from '@/billing/api/getProducts'
-import { CallToAction } from '@/components/callToAction/CallToAction'
 import { Faqs } from '@/components/faqs/Faqs'
 import { Features } from '@/components/features/Features'
 import { Hero } from '@/components/hero/Hero'
-import { PainPoints } from '@/components/painPoints/PainPoints'
+import { HowItWorks } from '@/components/howItWorks/HowItWorks'
 import { Pricing } from '@/components/pricing/Pricing'
+import { SectionVariant } from '@/components/section/Section'
 import { Testimonials } from '@/components/testimonials/Testimonials'
 
-export default async function Page() {
-  const products = await getProducts()
-  const prices = await getPrices()
+import constants from '../constants.json'
 
+export default async function Page() {
   return (
     <>
-      <Hero />
+      {constants.sections.map((section, index) => {
+        const isEven = index % 2 === 0
+        const variant: SectionVariant = isEven ? 'inverted' : 'default'
+        const defaultProps = {
+          id: section.navTitle,
+          variant,
+        }
 
-      <PainPoints />
+        if (section.type === 'hero') {
+          return <Hero key={section.title} {...defaultProps} {...section} />
+        }
 
-      <Features />
+        if (section.type === 'features') {
+          return <Features key={section.title} {...defaultProps} {...section} />
+        }
 
-      <Testimonials />
+        if (section.type === 'testimonials') {
+          return <Testimonials key={section.title} {...defaultProps} {...section} />
+        }
 
-      <Pricing products={products} prices={prices} />
+        if (section.type === 'pricing') {
+          return <Pricing key={section.title} {...defaultProps} {...section} />
+        }
 
-      <Faqs />
+        if (section.type === 'faqs') {
+          return <Faqs key={section.title} {...defaultProps} {...section} />
+        }
 
-      <CallToAction />
+        if (section.type === 'howItWorks') {
+          return <HowItWorks key={section.title} {...defaultProps} {...section} />
+        }
+
+        return <div key={index}>Unknown section type: {section.type}</div>
+      })}
     </>
   )
 }

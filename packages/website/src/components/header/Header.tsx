@@ -9,29 +9,13 @@ import React, { ComponentProps, ComponentPropsWithoutRef, useState } from 'react
 import { AnalyticsPrimaryButtonName } from '@/analytics/models'
 import constants from '@/constants.json'
 import { routes } from '@/routes'
+import { getDynamicNavItems } from '@/routes/getDynamicNavItems'
 
 import { PrimaryActionButton } from '../primaryActionButton/PrimaryActionButton'
 
 type NavigationItem = ComponentProps<typeof Sidebar>['items'][0]
 
-const NAVIGATION_ITEMS: NavigationItem[] = [
-  {
-    name: 'Features',
-    href: routes.features,
-  },
-  {
-    name: 'Testimonials',
-    href: routes.testimonials,
-  },
-  {
-    name: 'Pricing',
-    href: routes.pricing,
-  },
-  {
-    name: 'Blog',
-    href: routes.blog,
-  },
-]
+const NAVIGATION_ITEMS: NavigationItem[] = getDynamicNavItems()
 
 type Props = ComponentPropsWithoutRef<'header'>
 
@@ -87,11 +71,11 @@ export const Header = ({ ...props }: Props) => {
           ))}
         </div>
 
-        <div className="flex flex-1 items-center justify-end gap-x-2 pr-4 lg:pr-0">
-          <PrimaryActionButton name={AnalyticsPrimaryButtonName.Header}>
-            {constants.header.buttonText}
-          </PrimaryActionButton>
-        </div>
+        {constants.header.cta && (
+          <div className="flex flex-1 items-center justify-end gap-x-2 pr-4 lg:pr-0">
+            <PrimaryActionButton name={AnalyticsPrimaryButtonName.Header}>{constants.header.cta}</PrimaryActionButton>
+          </div>
+        )}
       </Headerbar>
 
       {NAVIGATION_ITEMS.length ? (

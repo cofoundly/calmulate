@@ -1,39 +1,50 @@
-import { HeadingText, ParagraphText, SmallText } from 'components'
-import Image from 'next/image'
+import { SmallText } from 'components'
+import Image, { ImageProps } from 'next/image'
 import React from 'react'
 
 import { AnalyticsPrimaryButtonName } from '@/analytics/models'
-import constants from '@/constants.json'
 
-import { Container } from '../container/Container'
 import { PrimaryActionButton } from '../primaryActionButton/PrimaryActionButton'
-import { Section } from '../section/Section'
+import { Section, SectionProps } from '../section/Section'
 
-export const Hero = () => {
+type Props = {
+  image?: ImageProps
+  cta?: string
+  footer?: string
+} & SectionProps
+
+export const Hero = ({ variant, image, cta, footer, ...sectionProps }: Props) => {
   return (
     <Section
-      className="pt-[95px]"
-      variant="inverted"
-      prefix={<Image src={constants.hero.image.src} alt={constants.hero.image.alt} priority width={200} height={200} />}
-      title={constants.hero.title}
-      highlighted={constants.hero.highlighted}
-      subtitle={constants.hero.subtitle}
+      variant={variant}
+      prefix={
+        image && (
+          <Image
+            className="bg-theme-background-subtle dark:bg-dark-theme-background-subtle rounded-lg shadow-lg"
+            priority
+            {...image}
+          />
+        )
+      }
+      {...sectionProps}
     >
-      <Container className="flex-1 justify-center text-center">
-        <div className="flex flex-col gap-y-2">
-          <HeadingText>{constants.hero.heading}</HeadingText>
-
-          <ParagraphText>{constants.hero.description}</ParagraphText>
-        </div>
-
+      <div className="mt-12 flex justify-center">
         <div className="flex flex-col items-center gap-y-4">
-          <PrimaryActionButton size="lg" name={AnalyticsPrimaryButtonName.Hero}>
-            {constants.hero.buttonText}
-          </PrimaryActionButton>
+          {cta && (
+            <PrimaryActionButton
+              name={AnalyticsPrimaryButtonName.Hero}
+              variant={variant === 'default' ? 'secondaryInverted' : 'primary'}
+              size="xl"
+            >
+              {cta}
+            </PrimaryActionButton>
+          )}
 
-          <SmallText>*{constants.hero.footer}</SmallText>
+          {footer && (
+            <SmallText className={variant === 'default' ? 'text-theme-content-inverted' : ''}>{footer}</SmallText>
+          )}
         </div>
-      </Container>
+      </div>
     </Section>
   )
 }

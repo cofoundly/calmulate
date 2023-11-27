@@ -12,7 +12,7 @@ type Variant =
   | 'lightNeutral'
   | 'lightInverted'
 type Color = string
-type Size = 'sm' | 'md' | 'lg'
+type Size = 'sm' | 'md' | 'lg' | 'xl'
 
 const variantToClassNames: Record<Variant, string> = {
   primary:
@@ -51,6 +51,7 @@ const sizeToButtonClassNames: Record<Size, string> = {
   sm: 'px-2 py-1 text-xs rounded-lg',
   md: 'px-4 py-2 text-sm rounded-xl',
   lg: 'px-4 py-2 lg:px-6 lg:py-3 text-base rounded-xl',
+  xl: 'px-8 py-4 lg:px-12 lg:py-6 text-xl rounded-2xl',
 }
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {

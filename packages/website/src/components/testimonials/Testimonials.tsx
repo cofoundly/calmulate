@@ -1,25 +1,24 @@
 import { Columns } from 'components'
 import React from 'react'
 
-import constants from '@/constants.json'
-import { SectionId } from '@/routes'
+import { Section, SectionProps } from '../section/Section'
+import { Testimonial, TestimonialProps } from './Testimonial'
 
-import { Section } from '../section/Section'
-import { Testimonial } from './Testimonial'
+type Props = {
+  testimonials?: TestimonialProps[]
+} & SectionProps
 
-export const Testimonials = () => {
+export const Testimonials = ({ testimonials, ...sectionProps }: Props) => {
   return (
-    <Section
-      id={SectionId.Testimonials}
-      title={constants.testimonials.title}
-      highlighted={constants.testimonials.highlighted}
-    >
-      <Columns>
-        {constants.testimonials.sections.map(testimonial => (
-          <li key={testimonial.name}>
-            <Testimonial {...testimonial} />
-          </li>
-        ))}
+    <Section {...sectionProps}>
+      <Columns className="mt-12 lg:mt-24">
+        {testimonials?.length
+          ? testimonials.map(testimonial => (
+              <li key={testimonial.name}>
+                <Testimonial {...testimonial} />
+              </li>
+            ))
+          : null}
       </Columns>
     </Section>
   )
