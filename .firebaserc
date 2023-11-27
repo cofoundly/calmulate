@@ -1,30 +1,30 @@
 {
   "projects": {
-    "development": "the-shell-development",
-    "staging": "the-shell-development",
-    "production": "the-shell-production"
+    "development": "calmulate-staging",
+    "staging": "calmulate-staging",
+    "production": "calmulate-production"
   },
   "targets": {
-    "the-shell-development": {
+    "calmulate-staging": {
       "hosting": {
         "app": [
-          "the-shell-development"
+          "calmulate-staging"
         ],
         "storybook": [
-          "the-shell-development-storybook-ui"
+          "calmulate-storybook"
         ],
         "website": [
-          "the-shell-development-website"
+          "calmulate-staging-website"
         ]
       }
     },
-    "the-shell-production": {
+    "calmulate-production": {
       "hosting": {
         "app": [
-          "the-shell-production"
+          "calmulate-production"
         ],
         "website": [
-          "the-shell-production-website"
+          "calmulate-production-website"
         ]
       }
     }

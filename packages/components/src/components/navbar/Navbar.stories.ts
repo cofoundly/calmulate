@@ -20,17 +20,12 @@ export const Default: Story = {
     items: [
       {
         name: 'Home',
-        href: '/',
-        active: false,
       },
       {
         name: 'Settings',
-        href: '/settings',
-        active: false,
       },
       {
         name: 'Teams',
-        href: '/teams',
         active: true,
       },
     ],

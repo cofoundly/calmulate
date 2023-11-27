@@ -5,6 +5,7 @@ import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { isExternalLink, useLink } from 'utils'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
+import { features } from '@/features'
 import { routes } from '@/router/routes'
 import { useSidebarOpen } from '@/sidebar/hooks/useSidebarOpen'
 
@@ -26,7 +27,7 @@ export const MainLayout = () => {
       href: routes.dashboard,
       icon: <HomeModernIcon />,
       active: location.pathname === routes.dashboard,
-      disabled: hasActiveSubscriptionLoading || !hasActiveSubscription,
+      disabled: features.subscriptions && (hasActiveSubscriptionLoading || !hasActiveSubscription),
     },
     {
       name: 'Settings',
@@ -74,7 +75,7 @@ export const MainLayout = () => {
         </Popover>
       </div>
 
-      <div className="hidden shrink-0 lg:flex lg:w-72 lg:flex-col">{sidebar}</div>
+      <div className="hidden shrink-0 lg:flex lg:flex-col">{sidebar}</div>
 
       <div className="bg-theme-background dark:bg-dark-theme-background flex flex-1 flex-col overflow-hidden">
         <Outlet />

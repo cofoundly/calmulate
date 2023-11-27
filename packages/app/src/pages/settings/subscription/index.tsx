@@ -1,8 +1,9 @@
-import { Loading } from 'components'
+import { Alert, Loading } from 'components'
 import React, { useEffect } from 'react'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
 import { useIsSubscriptionOwner } from '@/billing/hooks/useIsSubscriptionOwner'
+import { features } from '@/features'
 
 import { ManagedSubscriptionSection } from './components/managedSubscriptionSection/ManagedSubscriptionSection'
 import { Pricing } from './components/pricing/Pricing'
@@ -47,9 +48,11 @@ export const SettingsSubscription = () => {
 
   return (
     <div>
+      {hasSubscriptionSuccess && <Alert className="mb-8">Subscription purchased successfully!</Alert>}
+
       <SubscriptionDetailsSection />
 
-      <SubscriptionSeatsSection />
+      {features.teams && <SubscriptionSeatsSection />}
     </div>
   )
 }

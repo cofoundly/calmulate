@@ -1,0 +1,26 @@
+export type Metric = 'stress' | 'productivity' | 'balance'
+
+export enum MetricCriteria {
+  BackToBackMeetings = 'backToBackMeetings',
+  WorkEventsBeforeWorkingHours = 'workEventsBeforeWorkingHours',
+  WorkEventsDuringLunch = 'workEventsDuringLunch',
+  WorkEventsAfterWorkingHours = 'workEventsAfterWorkingHours',
+  UnreasonableMeetingDurations = 'unreasonableMeetingDurations',
+  UnreasonableDailyMeetingDuration = 'unreasonableDailyMeetingDuration',
+  NoScheduledBreaksWithinWorkingHours = 'noScheduledBreaksWithinWorkingHours',
+  UnreasonableDailyWorkingDuration = 'unreasonableDailyWorkingDuration',
+  LastMinuteWorkAdditionsToCalendar = 'lastMinuteWorkAdditionsToCalendar',
+  ScheduledFocusTime = 'scheduledFocusTime',
+  VarietyInWorkEvents = 'varietyInWorkEvents',
+  ScheduledReviewOrPlanningTime = 'scheduledReviewOrPlanningTime',
+  EffectiveUseOfBreaks = 'effectiveUseOfBreaks',
+  NoOverlappingEvents = 'noOverlappingEvents',
+  SticksToDefinedWorkingHours = 'sticksToDefinedWorkingHours',
+  PersonalEventsScheduled = 'personalEventsScheduled',
+  FlexibleWorkSchedule = 'flexibleWorkSchedule',
+  TimeForSelfCare = 'timeForSelfCare',
+  EveningWindDownTime = 'eveningWindDownTime',
+  EventsForPhysicalHealth = 'activitiesForPhysicalHealth',
+  SocialOrFamilyTimeScheduled = 'socialOrFamilyTimeScheduled',
+  RegularBreaksAndDowntime = 'regularBreaksAndDowntime',
+}

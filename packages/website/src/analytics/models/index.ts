@@ -5,7 +5,8 @@ export enum AnalyticsEvent {
 export enum AnalyticsPrimaryButtonName {
   Header = 'header',
   Hero = 'hero',
-  Cta = 'cta',
+  Features = 'features',
+  Pricing = 'pricing',
 }
 
 export type AnalyticsEventData = {

@@ -3,6 +3,7 @@ import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { useHasActiveSubscription } from '@/billing/hooks/useHasActiveSubscription'
+import { features } from '@/features'
 import { routes } from '@/router/routes'
 import { cleanUpAfterEach } from '@/test/cleanUpAfterEach'
 import { MockAppProvider } from '@/test/MockAppProvider'
@@ -45,29 +46,31 @@ describe('MainLayout', () => {
     expect(getDashboardButton()).toBeInTheDocument()
   })
 
-  it('disables the Dashboard button if loading the active subscription', () => {
-    mocks.useHasActiveSubscription.mockReturnValue({ data: false, isLoading: false })
+  if (features.subscriptions) {
+    it('disables the Dashboard button if loading the active subscription', () => {
+      mocks.useHasActiveSubscription.mockReturnValue({ data: false, isLoading: false })
 
-    render(
-      <MockAppProvider>
-        <MainLayout />
-      </MockAppProvider>,
-    )
+      render(
+        <MockAppProvider>
+          <MainLayout />
+        </MockAppProvider>,
+      )
 
-    expect(getDashboardButton()).toBeDisabled()
-  })
+      expect(getDashboardButton()).toBeDisabled()
+    })
 
-  it('disables the Dashboard button if the user does not have an active subscription', () => {
-    mocks.useHasActiveSubscription.mockReturnValue({ data: false, isLoading: false })
+    it('disables the Dashboard button if the user does not have an active subscription', () => {
+      mocks.useHasActiveSubscription.mockReturnValue({ data: false, isLoading: false })
 
-    render(
-      <MockAppProvider>
-        <MainLayout />
-      </MockAppProvider>,
-    )
+      render(
+        <MockAppProvider>
+          <MainLayout />
+        </MockAppProvider>,
+      )
 
-    expect(getDashboardButton()).toBeDisabled()
-  })
+      expect(getDashboardButton()).toBeDisabled()
+    })
+  }
 
   it('navigates to the Settings page when the Settings button is clicked', () => {
     mocks.useHasActiveSubscription.mockReturnValue({ data: true, isLoading: false })

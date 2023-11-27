@@ -2,6 +2,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 
 import { useAuthUser } from '@/auth/hooks/useAuthUser'
+import { features } from '@/features'
 import { QueryKeys } from '@/types'
 
 import { listenSubscriptionInfo } from '../api/listenSubscriptionInfo'
@@ -16,7 +17,7 @@ export const useSubscriptionInfoListener = () => {
   const subscriptionId = subscriptionSeats?.length && subscriptionSeats[0].subscriptionId
 
   useEffect(() => {
-    if (authUser && subscriptionId) {
+    if (features.subscriptions && authUser && subscriptionId) {
       // subscribe to the subscription info changes
       const unsubscribe = listenSubscriptionInfo(subscriptionId, subscriptionInfo => {
         queryClient.setQueryData([QueryKeys.SubscriptionInfo], subscriptionInfo)

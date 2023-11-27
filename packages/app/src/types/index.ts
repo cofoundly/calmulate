@@ -3,6 +3,7 @@ export const getTeamMembersQueryKey = (teamId: string) => `teams/${teamId}/membe
 
 export enum QueryKeys {
   AuthUser = 'authUser',
+  ICalCalendarData = 'iCalCalendarData',
   Products = 'products',
   Prices = 'prices',
   Subscriptions = 'subscriptions',

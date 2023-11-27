@@ -1,10 +1,7 @@
-import {
-  MutationCache,
-  QueryCache,
-  QueryClient,
-  QueryClientProvider as QueryClientProviderPrimitive,
-} from '@tanstack/react-query'
+import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister'
+import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 import { FirebaseError } from 'firebase/app'
 import React, { ReactNode } from 'react'
 import { toast } from 'react-hot-toast'
@@ -46,14 +43,18 @@ const queryClient = new QueryClient({
   }),
 })
 
+const persister = createSyncStoragePersister({
+  storage: window.localStorage,
+})
+
 type Props = { children: ReactNode }
 
 export const QueryClientProvider = ({ children }: Props) => {
   return (
-    <QueryClientProviderPrimitive client={queryClient}>
+    <PersistQueryClientProvider client={queryClient} persistOptions={{ persister }}>
       {children}
 
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" panelPosition="right" />
-    </QueryClientProviderPrimitive>
+    </PersistQueryClientProvider>
   )
 }

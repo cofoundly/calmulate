@@ -1,19 +1,18 @@
-import { HeadingText, SmallText } from 'components'
 import React from 'react'
 
 import { Header } from '@/components/header/Header'
-import { PageLayout } from '@/components/pageLayout/PageLayout'
+
+import { MetricSidebar } from './components/metricSidebar/MetricSidebar'
+import { WeeklyCalendar } from './components/weeklyCalendar/WeeklyCalendar'
 
 export const Dashboard = () => {
   return (
     <>
-      <Header />
+      <Header className="lg:hidden" />
 
-      <PageLayout>
-        <HeadingText>Dashboard</HeadingText>
+      <WeeklyCalendar />
 
-        <SmallText className="mt-2">Insert your app here 🚀</SmallText>
-      </PageLayout>
+      <MetricSidebar />
     </>
   )
 }

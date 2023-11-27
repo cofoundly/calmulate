@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { useAuthUser } from '@/auth/hooks/useAuthUser'
+import { features } from '@/features'
 import { QueryKeys } from '@/types'
 
 import { getSubscriptionSeatsForUser } from '../api/getSubscriptionSeatsForUser'
@@ -13,7 +14,7 @@ export const useSubscriptionSeats = () => {
   const query = useQuery({
     queryKey: [QueryKeys.SubscriptionSeats],
     queryFn: () => (userId ? getSubscriptionSeatsForUser(userId) : undefined),
-    enabled: Boolean(userId),
+    enabled: Boolean(features.subscriptions && userId),
   })
 
   return {

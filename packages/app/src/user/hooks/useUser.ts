@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { useAuthUser } from '@/auth/hooks/useAuthUser'
+import { features } from '@/features'
 import { QueryKeys } from '@/types'
 
 import { getUser } from '../api/getUser'
@@ -13,7 +14,7 @@ export const useUser = () => {
   const query = useQuery({
     queryKey: [QueryKeys.User],
     queryFn: () => (userId ? getUser(userId) : undefined),
-    enabled: Boolean(userId),
+    enabled: Boolean(features.auth && userId),
   })
 
   return {

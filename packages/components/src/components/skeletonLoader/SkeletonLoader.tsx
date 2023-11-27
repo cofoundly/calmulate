@@ -1,13 +1,11 @@
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 const TEST_ID = 'skeleton-loader'
 
-type SkeletonLoaderProps = {
-  className?: string
-}
+type SkeletonLoaderProps = ComponentPropsWithoutRef<'div'>
 
-const SkeletonLoader = ({ className }: SkeletonLoaderProps) => {
+const SkeletonLoader = ({ className = '', ...props }: SkeletonLoaderProps) => {
   return (
     <div
       className={twMerge(
@@ -15,6 +13,7 @@ const SkeletonLoader = ({ className }: SkeletonLoaderProps) => {
         className,
       )}
       data-testid={TEST_ID}
+      {...props}
     />
   )
 }

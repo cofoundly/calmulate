@@ -24,14 +24,16 @@ import { HugeText } from './components/hugeText/HugeText'
 import { Icon } from './components/icon/Icon'
 import { IconPicker } from './components/iconPicker/IconPicker'
 import { LabelText } from './components/labelText/LabelText'
-import { List } from './components/list/List'
+import { List, ListItem } from './components/list/List'
 import { Loading } from './components/loading/Loading'
 import { Logo } from './components/logo/Logo'
 import { Navbar } from './components/navbar/Navbar'
+import { NumberedList } from './components/numberedList/NumberedList'
 import { ParagraphText } from './components/paragraphText/ParagraphText'
 import { Popover } from './components/popover/Popover'
 import { PricingCard } from './components/pricingCard/PricingCard'
 import { PricingCards } from './components/pricingCards/PricingCards'
+import { ProgressCircle } from './components/progressCircle/ProgressCircle'
 import { RadioGroup } from './components/radioGroup/RadioGroup'
 import { Select } from './components/select/Select'
 import { Sidebar } from './components/sidebar/Sidebar'
@@ -39,8 +41,10 @@ import { SkeletonLoader } from './components/skeletonLoader/SkeletonLoader'
 import { SlimLayout } from './components/slimLayout/SlimLayout'
 import { SmallText } from './components/smallText/SmallText'
 import { Snackbar } from './components/snackbar/Snackbar'
+import { Spinner } from './components/spinner/Spinner'
 import { Table } from './components/table/Table'
 import { TextInput } from './components/textInput/TextInput'
+import { TinyText } from './components/tinyText/TinyText'
 import { TitleText } from './components/titleText/TitleText'
 
 export {
@@ -69,13 +73,16 @@ export {
   IconPicker,
   LabelText,
   List,
+  ListItem,
   Loading,
   Logo,
   Navbar,
+  NumberedList,
   ParagraphText,
   Popover,
   PricingCard,
   PricingCards,
+  ProgressCircle,
   RadioGroup,
   Select,
   Sidebar,
@@ -83,7 +90,9 @@ export {
   SlimLayout,
   SmallText,
   Snackbar,
+  Spinner,
   Table,
   TextInput,
+  TinyText,
   TitleText,
 }

@@ -133,7 +133,7 @@ export const themeColorShadeMap = {
     content: {
       subtle: {
         color: 'neutral',
-        shade: '600',
+        shade: '500',
       },
       DEFAULT: {
         color: 'neutral',

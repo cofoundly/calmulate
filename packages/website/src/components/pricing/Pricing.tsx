@@ -1,74 +1,41 @@
 'use client'
 
-import { PricingCards } from 'components'
-import React, { ComponentProps, useEffect, useMemo, useState } from 'react'
-import { BillingInterval, Price, Product } from 'types'
-import { formatBillingInterval, getPricingCardProducts, parseBillingInterval } from 'utils'
+import { Columns, PricingCard } from 'components'
+import React, { ComponentProps } from 'react'
 
-import { useCreateCheckoutSession } from '@/billing/hooks/useCreateCheckoutSession'
-import constants from '@/constants.json'
-import { SectionId } from '@/routes'
+import { usePrimaryActionClick } from '@/actions/hooks/usePrimaryActionClick'
+import { AnalyticsPrimaryButtonName } from '@/analytics/models'
 
-import { Section } from '../section/Section'
-
-const DEFAULT_QUANTITY = 1
-
-type BillingIntervalOption = ComponentProps<typeof PricingCards>['billingIntervalOptions'][0]
+import { Section, SectionProps } from '../section/Section'
 
 type Props = {
-  products: Product[]
-  prices: Price[]
-}
+  prices?: Omit<ComponentProps<typeof PricingCard>, 'id' | 'onClick'>[]
+} & SectionProps
 
-export const Pricing = ({ products, prices }: Props) => {
-  // Note: we set the billingInterval in a useEffect when the prices updates
-  const [billingInterval, setBillingInterval] = useState<BillingInterval>(BillingInterval.Month)
-  const [billingIntervalOptions, setBillingIntervalOptions] = useState<BillingIntervalOption[]>([])
-
-  const { mutate: createCheckoutSession, isLoading: createCheckoutSessionLoading } = useCreateCheckoutSession()
-
-  const pricingCardsProducts = useMemo(
-    () => getPricingCardProducts({ billingInterval, products, prices, loading: createCheckoutSessionLoading }),
-    [billingInterval, createCheckoutSessionLoading, prices, products],
-  )
-
-  useEffect(() => {
-    // when the prices update, set the selected billing interval and billing interval options
-    if (prices?.length) {
-      // get the unique billing intervals from the prices
-      const billingIntervalOptions = [...new Set(prices?.map(price => price.interval))].map(billingInterval => ({
-        label: formatBillingInterval(billingInterval),
-        value: billingInterval,
-      }))
-
-      setBillingIntervalOptions(billingIntervalOptions)
-
-      // set the selected billing interval to the first one
-      setBillingInterval(billingIntervalOptions[0].value)
-    }
-  }, [prices])
+export const Pricing = ({ prices, ...sectionProps }: Props) => {
+  const onPrimaryActionClick = usePrimaryActionClick()
 
   return (
-    <Section
-      id={SectionId.Pricing}
-      variant="inverted"
-      title={constants.pricing.title}
-      highlighted={constants.pricing.highlighted}
-    >
-      <PricingCards
-        billingInterval={billingInterval}
-        billingIntervalOptions={billingIntervalOptions}
-        products={pricingCardsProducts}
-        onBillingIntervalClick={newBillingIntervalValue => {
-          setBillingInterval(parseBillingInterval(newBillingIntervalValue))
-        }}
-        onProductClick={id => {
-          createCheckoutSession({
-            priceId: id,
-            quantity: DEFAULT_QUANTITY,
-          })
-        }}
-      />
+    <Section {...sectionProps}>
+      <div className="mt-12 lg:mt-24">
+        <Columns className="p-1 pb-6">
+          {prices?.length
+            ? prices.map(priceInfo => (
+                <li key={priceInfo.title}>
+                  <PricingCard
+                    {...priceInfo}
+                    id={priceInfo.title} // satisfy TS
+                    onClick={() => {
+                      onPrimaryActionClick({
+                        buttonName: AnalyticsPrimaryButtonName.Pricing,
+                      })
+                    }}
+                  />
+                </li>
+              ))
+            : null}
+        </Columns>
+      </div>
     </Section>
   )
 }
