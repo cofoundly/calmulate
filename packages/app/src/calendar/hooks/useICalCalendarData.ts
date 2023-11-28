@@ -8,6 +8,7 @@ export const useICalCalendarData = (url: string) => {
   return useQuery({
     queryKey: [QueryKeys.ICalCalendarData, url],
     queryFn: () => fetchICalCalendarData(url),
-    enabled: Boolean(url),
+    // TODO: SS temporarily disabled for demo
+    // enabled: Boolean(url),
   })
 }
