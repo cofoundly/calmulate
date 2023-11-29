@@ -12,16 +12,20 @@ type Props = {
   image?: ImageProps
   cta?: string
   footer?: string
+  screenshot?: ImageProps
 } & SectionProps
 
-export const Hero = ({ variant, image, cta, footer, ...sectionProps }: Props) => {
+export const Hero = ({ variant, image, cta, footer, screenshot, ...sectionProps }: Props) => {
   return (
     <Section
       variant={variant}
       prefix={
         image && (
           <Image
-            className="bg-theme-background-subtle dark:bg-dark-theme-background-subtle rounded-full shadow-lg"
+            className={twMerge(
+              'bg-theme-background-subtle dark:bg-dark-theme-background-subtle rounded-full shadow-lg',
+              image.className || '',
+            )}
             priority
             {...image}
           />
@@ -48,6 +52,8 @@ export const Hero = ({ variant, image, cta, footer, ...sectionProps }: Props) =>
           )}
         </div>
       </div>
+
+      {screenshot && <Image className="mt-12 rounded-lg lg:rounded-xl shadow-lg" {...screenshot} />}
     </Section>
   )
 }
