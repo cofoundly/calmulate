@@ -10,7 +10,7 @@ export type SectionVariant = 'default' | 'inverted'
 export type SectionProps = Omit<ComponentPropsWithoutRef<'section'>, 'prefix'> & {
   variant?: SectionVariant
   prefix?: ReactNode
-  title: string
+  title?: string
   highlighted?: string
   subtitle?: string
 }
@@ -27,11 +27,7 @@ export const Section = ({
 }: SectionProps) => {
   return (
     <section
-      className={twMerge(
-        'relative px-4 sm:px-8 py-24 lg:px-16 flex flex-col justify-center',
-
-        className,
-      )}
+      className={twMerge('relative px-4 sm:px-8 py-24 lg:px-16 flex flex-col justify-center', className)}
       {...props}
     >
       <Background className="absolute inset-0" variant={variant} />
@@ -40,13 +36,15 @@ export const Section = ({
         <Container className={twMerge('text-center items-center')}>
           {prefix}
 
-          <HugeHighlightedText
-            className={variant === 'default' ? 'text-theme-content-inverted' : ''}
-            variant={variant}
-            highlighted={highlighted}
-          >
-            {title}
-          </HugeHighlightedText>
+          {title && (
+            <HugeHighlightedText
+              className={variant === 'default' ? 'text-theme-content-inverted' : ''}
+              variant={variant}
+              highlighted={highlighted}
+            >
+              {title}
+            </HugeHighlightedText>
+          )}
 
           {subtitle && (
             <ParagraphText className={variant === 'default' ? 'text-theme-content-inverted' : ''}>
