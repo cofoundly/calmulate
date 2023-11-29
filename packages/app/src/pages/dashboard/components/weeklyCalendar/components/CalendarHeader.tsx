@@ -50,7 +50,7 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
   return (
     <header
       className={twMerge(
-        'border-theme-border dark:border-dark-theme-border flex flex-none flex-wrap items-center justify-between gap-2 border-b px-4 py-2 lg:gap-4 lg:px-8 lg:py-4',
+        'border-theme-border dark:border-dark-theme-border flex flex-none flex-wrap items-center justify-between gap-4 border-b px-6 py-4 lg:px-8',
         className,
       )}
       {...props}
@@ -59,17 +59,17 @@ export const CalendarHeader = ({ className = '', ...props }: Props) => {
 
       <div className="flex items-center">
         <div className="border-theme-border dark:border-dark-theme-border relative flex items-center rounded-xl border shadow-sm">
-          <Button variant="secondaryNeutral" size="sm" className="border-0 shadow-none" onClick={onPreviousWeekClick}>
+          <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onPreviousWeekClick}>
             <span className="sr-only">{dayMode ? 'Yesterday' : 'Previous week'}</span>
 
             <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
           </Button>
 
-          <Button variant="secondaryNeutral" size="sm" className="border-0 shadow-none" onClick={onThisWeekClick}>
+          <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onThisWeekClick}>
             {dayMode ? 'Today' : 'This Week'}
           </Button>
 
-          <Button variant="secondaryNeutral" size="sm" className="border-0 shadow-none" onClick={onNextWeekClick}>
+          <Button variant="secondaryNeutral" className="border-0 shadow-none" onClick={onNextWeekClick}>
             <span className="sr-only">{dayMode ? 'Tomorrow' : 'Next week'}</span>
 
             <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
