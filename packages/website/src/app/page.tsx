@@ -22,27 +22,27 @@ export default async function Page() {
         }
 
         if (section.type === 'hero') {
-          return <Hero key={section.title} {...defaultProps} {...section} />
+          return <Hero key={index} className={index === 0 ? 'lg:pt-36' : ''} {...defaultProps} {...section} />
         }
 
         if (section.type === 'features') {
-          return <Features key={section.title} {...defaultProps} {...section} />
+          return <Features key={index} {...defaultProps} {...section} />
         }
 
         if (section.type === 'testimonials') {
-          return <Testimonials key={section.title} {...defaultProps} {...section} />
+          return <Testimonials key={index} {...defaultProps} {...section} />
         }
 
         if (section.type === 'pricing') {
-          return <Pricing key={section.title} {...defaultProps} {...section} />
+          return <Pricing key={index} {...defaultProps} {...section} />
         }
 
         if (section.type === 'faqs') {
-          return <Faqs key={section.title} {...defaultProps} {...section} />
+          return <Faqs key={index} {...defaultProps} {...section} />
         }
 
         if (section.type === 'howItWorks') {
-          return <HowItWorks key={section.title} {...defaultProps} {...section} />
+          return <HowItWorks key={index} {...defaultProps} {...section} />
         }
 
         return <div key={index}>Unknown section type: {section.type}</div>
