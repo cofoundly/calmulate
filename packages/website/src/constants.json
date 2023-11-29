@@ -5,64 +5,56 @@
   "sections": [
     {
       "type": "hero",
-      "image": {
-        "src": "/calm-swan-1.png",
-        "alt": "Calm swan meditating",
-        "width": 240,
-        "height": 240
-      },
-      "heading": "The Future of Mindful Productivity",
       "title": "Your Personal Productivity Coach",
       "highlighted": "Coach",
       "subtitle": "No more burnouts. No more stress overload. Just mindful productivity.",
       "cta": "Join the Waiting List",
-      "footer": "Join early adopters shaping the future of mindful work."
+      "screenshot": {
+        "src": "/screenshot.png",
+        "alt": "An annotated screenshot of the Calmulate app.",
+        "width": 1352,
+        "height": 794
+      }
     },
     {
       "type": "features",
       "navTitle": "Features",
-      "title": "Discover the Calmulate Difference",
-      "highlighted": "Difference",
-      "subtitle": "Integrating mindfulness seamlessly into your workflow.",
+      "title": "Features",
+      "highlighted": "Features",
+      "subtitle": "Calmulate is designed to help you achieve a healthier work-life harmony.",
       "sections": [
         {
+          "title": "Seamless Calendar Synchronization",
+          "description": "Calmulate effortlessly integrates with your existing calendar, aligning your appointments and tasks with intelligent scheduling. It not only streamlines your day for peak productivity but also carves out time for rest, ensuring a balanced rhythm between work and wellness.",
           "image": {
-            "src": "/stress-criteria.png",
-            "alt": "A screenshot of the Calmulate stress analysis tool indicating various criteria that the stress level is based on",
-            "width": 480,
-            "height": 480
-          },
-          "title": "Data-Driven Insights",
-          "description": "Harness the power of analytics to tailor your work habits for maximum efficiency.",
-          "features": ["Customized Stress Management", "Optimal Work Time Suggestions", "Integration with Wearables"],
-          "cta": "Join the Waiting List",
-          "footer": ""
-        },
-        {
-          "image": {
+            "className": "rounded-full",
             "src": "/calendar.png",
-            "alt": "A screenshot of the Calmulate calendar indicating levels of stress, productivity and balance for each day",
-            "width": 480,
-            "height": 480
-          },
-          "title": "Smart Calendar Syncing",
-          "description": "Synchronize your routines with Calmulate to find the perfect work-life balance.",
-          "features": ["Automated Mindfulness Reminders", "Efficient Time Blocking", "Seamless Calendar Integration"],
-          "cta": "",
-          "footer": ""
+            "alt": "A 3d illustration of a calendar.",
+            "width": 360,
+            "height": 360
+          }
         },
         {
+          "title": "Smart Wearable Connectivity",
+          "description": "Sync with your favorite wearables and let Calmulate bring a new level of personalization to your day. By tracking real-time stress and activity data, the app provides tailored insights to keep your well-being at the forefront of your daily routine.",
           "image": {
-            "src": "/balance-suggestions.png",
-            "alt": "A screenshot of the Calmulate balance suggestions tool indicating various activities that can be done to reduce stress",
-            "width": 480,
-            "height": 480
-          },
-          "title": "Stress Relief Activities",
-          "description": "Discover activities that reduce stress, curated just for you.",
-          "features": ["Personalized Activity Suggestions", "Progress Tracking", "Community Challenges"],
-          "cta": "",
-          "footer": ""
+            "className": "rounded-full",
+            "src": "/watch.png",
+            "alt": "A 3d illustration of a watch.",
+            "width": 360,
+            "height": 360
+          }
+        },
+        {
+          "title": "Mindfulness at Your Fingertips",
+          "description": "Delve into mindfulness with Calmulate's guided sessions and reminders, all thoughtfully woven into your day. With actionable analytics and serene prompts, the app not only helps you stay productive but also deeply connected to your moment-to-moment well-being.",
+          "image": {
+            "className": "rounded-full",
+            "src": "/mindfulness.png",
+            "alt": "A 3d illustration of a succulent, planets and clouds.",
+            "width": 360,
+            "height": 360
+          }
         }
       ]
     },
@@ -109,13 +101,6 @@
     },
     {
       "type": "hero",
-      "image": {
-        "src": "/calm-swan-2.png",
-        "alt": "Calm swan meditating",
-        "width": 240,
-        "height": 240
-      },
-      "heading": "",
       "title": "Say Goodbye to Overwhelm",
       "highlighted": "Overwhelm",
       "subtitle": "Embrace the calm efficiency with Calmulate.",
